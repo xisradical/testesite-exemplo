@@ -70,30 +70,39 @@ if (track) {
 }
 
 // Carrossel de Cases - Arrastar com o mouse (usando jQuery)
-$(document).ready(function () {
-    let isDown = false;
-    let startX;
-    let scrollLeft;
+ window.addEventListener('DOMContentLoaded', () => {
+    const carousel = document.getElementById('carousel-cases');
+    const btnLeft = document.getElementById('btn-left');
+    const btnRight = document.getElementById('btn-right');
 
-    const $carousel = $('#carousel-cases');
+    const scrollAmount = 300;
 
-    $carousel.on('mousedown', function (e) {
-        isDown = true;
-        $(this).addClass('dragging');
-        startX = e.pageX;
-        scrollLeft = $(this).scrollLeft();
+    btnLeft.addEventListener('click', () => {
+      carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
     });
 
-    $carousel.on('mouseleave mouseup', function () {
-        isDown = false;
-        $(this).removeClass('dragging');
+    btnRight.addEventListener('click', () => {
+      carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
     });
+  });
 
-    $carousel.on('mousemove', function (e) {
-        if (!isDown) return;
-        e.preventDefault();
-        const x = e.pageX;
-        const walk = (x - startX) * 2; // Velocidade
-        $(this).scrollLeft(scrollLeft - walk);
-    });
-});
+  // Animação de fade-in ao aparecer
+  document.addEventListener('DOMContentLoaded', () => {
+    const section = document.querySelector('.onboard-section');
+    section.style.opacity = 0;
+    section.style.transform = 'translateY(30px)';
+    section.style.transition = 'opacity 1s ease, transform 1s ease';
+
+    function checkVisibility() {
+      const rect = section.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.85) {
+        section.classList.add('fade-in');
+        section.style.opacity = 1;
+        section.style.transform = 'translateY(0)';
+        window.removeEventListener('scroll', checkVisibility);
+      }
+    }
+
+    window.addEventListener('scroll', checkVisibility);
+    checkVisibility();
+  });

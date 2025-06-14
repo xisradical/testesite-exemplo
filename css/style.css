@@ -33,16 +33,29 @@ body {
     transform: translateY(-3px);
 }
 
+
+
 /* Estilos para a seção de funcionalidades */
 .feature-button {
     transition: all 0.3s ease-out;
     border-left: 3px solid transparent;
+    text-align: right;
+    gap: 6px;
+    font-size: 14px;
+    line-height: 1.2;
+    background: transparent;
+    border: none;
+    width: 100%;
+    transition: all 0.3s ease;
+
+
 }
 .feature-button:not(.active):hover {
     background-color: var(--soft-purple);
     color: var(--purple);
     border-left-color: var(--purple);
     transform: translateX(5px);
+    
 }
 .feature-button.active {
     background-color: transparent;
@@ -57,6 +70,7 @@ body {
     object-fit: cover;
 }
 
+/* Planos */
  .Pessoa {
     background-image: url('https://vtracker.com.br/assets/img/vtracker_plans.png');
   background-size: cover;
@@ -102,10 +116,12 @@ body {
 }
 
 /* Estilo da seção Cases de Sucesso */
+/* Estilo base */
 #cases {
   padding: 4rem 2rem;
-  max-width: 1200px;
+  max-width: 1400px;
   margin: auto;
+  position: relative;
 }
 
 #cases h2 {
@@ -117,15 +133,10 @@ body {
 
 .carousel-container {
   display: flex;
-  overflow-x: auto;
+  overflow-x: hidden;
   scroll-behavior: smooth;
   gap: 1rem;
   padding-bottom: 1rem;
-  cursor: grab;
-}
-
-.carousel-container.dragging {
-  cursor: grabbing;
 }
 
 .case-card {
@@ -160,7 +171,46 @@ body {
 
 .case-info p {
   font-size: 0.95rem;
-  color: #f5e6ff;
+  color: #999999;
+}
+
+/* Setas */
+.carousel-nav {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+.nav-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: transform 0.2s;
+  pointer-events: all;
+  z-index: 3;
+}
+
+.nav-arrow:hover {
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
+}
+
+/* Corrigido para ambas ficarem fora */
+.nav-arrow.left {
+  left: -50px; /* Ajuste esse valor conforme necessário */
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.nav-arrow.right {
+  right: -50px; /* Ajuste esse valor conforme necessário */
 }
 
 #precos {
@@ -168,3 +218,118 @@ body {
   background-color: #fbfbfc;
   margin-bottom: 2rem;
 }
+
+.chat-icon {
+  position: fixed;
+  bottom: 20px;    /* distância do rodapé */
+  right: 20px;      /* distância da borda esquerda */
+  width: 80px;     /* tamanho do ícone */
+  height: 80px;
+  cursor: pointer;
+  z-index: 1000;   /* para ficar sempre acima */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+
+.chat-icon img {
+  width: 80%;  /* ajusta o tamanho da imagem dentro do círculo */
+  height: 70%;
+  object-fit: contain;
+  pointer-events: none; /* para que o clique passe para o link */
+}
+
+.chat-icon:hover {
+  box-shadow: 0 6px 12px rgba(185, 185, 185, 0.6);
+}
+
+/* Suceso do cliente */
+  .onboard-section {
+    background-color: #6A8095;
+    color: #ffffff;
+    padding: 60px 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .onboard-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .onboard-section h2 {
+    font-size: 2.8rem;
+    margin-bottom: 10px;
+    font-weight: 700;
+    color: #ffffff;
+  }
+
+  .onboard-section .subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 40px;
+    color: #B3B4B4;
+  }
+
+.onboard-cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+  margin-bottom: 40px;
+}
+
+  .card {
+    background-color: rgba(255, 255, 255, 0.08);
+    border-radius: 15px;
+    padding: 25px 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: default;
+  }
+
+  .card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+    background-color: rgba(255, 255, 255, 0.12);
+  }
+
+  .icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+
+  .card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .card p {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #B3B4B4;
+  }
+
+  .btn-start {
+    background-color: #ffffff;
+    color: #B329E5;
+    border: none;
+    padding: 15px 35px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .btn-start:hover {
+    background-color: #B329E5;
+    color: #ffffff;
+  }
+
+  .fade-in {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: opacity 1s ease, transform 1s ease;
+  }

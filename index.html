@@ -9,6 +9,13 @@
     <script src="https://cdn.tailwindcss.com"></script> 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+ <!-- Icone do chat -->
+<a href="#" class="chat-icon" aria-label="Abrir conversa">
+  <img src="https://blogger.googleusercontent.com/img/a/AVvXsEjE9JgwvqNim81CqZI3c9-ox_sN9oa2p6wDzeUautOaqN_PDVJyKyI2w7STSdFp1JSsrrM9t1yRtEbYduRGVL6rM8U26SL7zVdWDI6okjJXkIcxqvOy4kqgwlCi8ypytq6LqbdNmA-rsZEecFz1Kn3crhCOGo0efpCdeQA8yjGObh2GjDFXTLt9DQca36s" alt="Chat">
+</a>
+
 
     <!-- Nosso CSS Customizado -->
     <link rel="stylesheet" href="css/style.css" />
@@ -72,6 +79,56 @@
             </div>
         </section>
 
+        <!-- Seção Onboard -->
+<!-- Seção Onboard -->
+<section id="onboard" class="onboard-section">
+  <div class="container">
+    <h2>Seu Processo de Onboard</h2>
+    <p class="subtitle">Tudo o que você recebe ao entrar com a gente:</p>
+
+    <div class="onboard-cards">
+      <div class="card">
+        <div class="icon">🆓</div>
+        <h3>Trial com Acompanhamento</h3>
+        <p>Teste com suporte humano para garantir sua experiência desde o primeiro clique.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🚀</div>
+        <h3>Onboard Personalizado</h3>
+        <p>Implementação guiada, rápida e de acordo com as suas metas e prioridades.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">💬</div>
+        <h3>Chat Dedicado</h3>
+        <p>Canal direto com nosso time para suporte, dúvidas e orientações estratégicas.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">📈</div>
+        <h3>Acompanhamento Contínuo</h3>
+        <p>Jornada monitorada com checkpoints mensais e sugestões de otimização constantes.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">⭐</div>
+        <h3>Agregamos Valor</h3>
+        <p>Elevamos o nível do seu serviço com ferramentas e visão estratégica de impacto.</p>
+      </div>
+
+      <div class="card">
+        <div class="icon">🤖</div>
+        <h3>Relatório Semanal por IA</h3>
+        <p>Receba insights automáticos e inteligentes para acompanhar resultados reais.</p>
+      </div>
+    </div>
+
+    <button class="btn-start">Quero começar agora!</button>
+  </div>
+</section>
+
+
         <!-- Funcionalidades -->
         <section id="funcionalidades" class="py-20 bg-gray-50/70">
             <div class="container mx-auto px-6">
@@ -96,6 +153,9 @@
                             </button>
                             <button data-target="insights" class="feature-button text-left whitespace-nowrap w-full p-4 rounded-lg">
                                 Insights
+                            </button>
+                             <button data-target="WordTree" class="feature-button text-left whitespace-nowrap w-full p-4 rounded-lg">
+                                WordTree
                             </button>
                             <button data-target="Postagem Agendada" class="feature-button text-left whitespace-nowrap w-full p-4 rounded-lg">
                                 Postagem Agendada
@@ -122,6 +182,10 @@
                         </div>
                         <div id="insights" class="feature-content">
                             <img src="https://placehold.co/800x450/B329E5/FFFFFF?text=Gera%C3%A7%C3%A3o+de+Insights"
+                                alt="Gráfico de Insights" class="rounded-lg shadow-lg" />
+                        </div>
+                         <div id="WordTree" class="feature-content">
+                            <img src="https://placehold.co/800x450/ff0b00/FFFFFF?text=WordTree"
                                 alt="Gráfico de Insights" class="rounded-lg shadow-lg" />
                         </div>
                          <div id="Postagem Agendada" class="feature-content">
@@ -204,6 +268,8 @@
             </div>
         </section>
 
+
+
         <!-- Imprensa -->
         <section id="press" class="py-20 bg-gray-50/70">
             <div class="container mx-auto px-6">
@@ -229,9 +295,19 @@
 
 
         <!-- Cases de Sucesso -->
+
 <section id="cases">
   <h2>Cases de Sucesso</h2>
+
+  <!-- Botões de navegação -->
+  <div class="carousel-nav">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjPoWZHXgaDhwricU-QHPtJAWluIg4NwQkf8KJ_2Q30OYfPpLpgZePca4B2AOgoC0tJmsmrPQYdhpzV2KPMmndJSAOter5ZA09NslBCb02zsRhxdudlaf8E3ycS3BR5gsx4hPLf3uJkqxJL6EyCKNiszWS2wAG3j5pMxGMY0c-MtDLiuV7qCdfzhoXWn8Q/s1600/pngwing.com.png" class="nav-arrow left" id="btn-left" alt="Seta esquerda">
+    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjPoWZHXgaDhwricU-QHPtJAWluIg4NwQkf8KJ_2Q30OYfPpLpgZePca4B2AOgoC0tJmsmrPQYdhpzV2KPMmndJSAOter5ZA09NslBCb02zsRhxdudlaf8E3ycS3BR5gsx4hPLf3uJkqxJL6EyCKNiszWS2wAG3j5pMxGMY0c-MtDLiuV7qCdfzhoXWn8Q/s1600/pngwing.com.png" class="nav-arrow right" id="btn-right" alt="Seta direita">
+  </div>
+
   <div class="carousel-container" id="carousel-cases">
+
+
     <!-- Case 1 -->
     <div class="case-card">
       <img src="https://www.infomoney.com.br/wp-content/uploads/2024/09/RIR_240914_Experiencia_Entrada_VANSBUMBEERS-8308.jpg"  alt="Rock In Rio" />
@@ -258,8 +334,28 @@
         <p>Case de sucesso entre Suvinil e Risqué</p>
       </div>
     </div>
+
+<!-- Case 4 -->
+    <div class="case-card">
+      <img src="https://blog.vtracker.com.br/hubfs/1724087614287.png"  alt="Verde Lésbico" />
+      <div class="case-info">
+        <h4>Verde Lésbico - Suvinil e Risqué</h4>
+        <p>Case de sucesso entre Suvinil e Risqué</p>
+      </div>
+    </div>
+
+<!-- Case 5 -->
+    <div class="case-card">
+      <img src="https://blog.vtracker.com.br/hubfs/1724087614287.png"  alt="Verde Lésbico" />
+      <div class="case-info">
+        <h4>Verde Lésbico - Suvinil e Risqué</h4>
+        <p>Case de sucesso entre Suvinil e Risqué</p>
+      </div>
+    </div>
   </div>
 </section>
+
+
 
         <!-- Preços -->
         <section id="precos" class="py-20 bg-white overflow-hidden">
