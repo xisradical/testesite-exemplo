@@ -23,6 +23,11 @@ body {
    Movimento na imagem
    ========================================================================== */
 
+.expand-container {
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15); /* sombra para cima, ajustável */
+    border-radius: 20px;
+}
+
 #hero {
   opacity: 0;
   transform: translateY(40px) scale(0.98);
@@ -35,6 +40,9 @@ body {
     transform: translateY(0) scale(1);
   }
 }
+
+
+
 
 /* ==========================================================================
    Reduzir espaço das logos
@@ -52,13 +60,6 @@ body {
   /* Sombra (atrás da section) */
   box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15); /* sombra para cima, ajustável */
 }
-
-.expand-container {
-  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15); /* sombra para cima, ajustável */
-    border-radius: 20px;
-
-}
-
 
 /* ==========================================================================
    Classes Utilitárias
@@ -113,6 +114,10 @@ body {
     box-shadow: 0 6px 12px rgba(185, 185, 185, 0.6);
     transform: scale(1.1);
 }
+
+
+
+
 
 /* ==========================================================================
    Seção de Funcionalidades (Com Bloco Centralizado)
