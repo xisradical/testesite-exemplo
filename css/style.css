@@ -1,13 +1,17 @@
-/* Define a fonte Inter como padrão */
+/* ==========================================================================
+   Configurações Globais e Variáveis de Cor
+   ========================================================================== */
+
+/* Define a fonte Inter como padrão e adiciona suavização de fonte. */
 body {
     font-family: 'Inter', sans-serif;
-    background-color: #ffffff;
+    background-color: #ffffff; /* Fundo geral da página */
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-/* Cores personalizadas */
+/* Centraliza as variáveis de cor para fácil manutenção. */
 :root {
     --purple: #B329E5;
     --dark-gray: #6A8095;
@@ -15,321 +19,460 @@ body {
     --soft-purple: #f5e6ff;
 }
 
+#social-proof {
+  background-color:#f8f8f8;
+}
+
+
+
+/* ==========================================================================
+   Classes Utilitárias
+   ========================================================================== */
+
 .bg-custom-purple { background-color: var(--purple); }
 .text-custom-purple { color: var(--purple); }
 .border-custom-purple { border-color: var(--purple); }
 .text-custom-gray-dark { color: var(--dark-gray); }
 .border-custom-gray-light { border-color: var(--light-gray); }
 
-/* Estilo para botão com gradiente */
+/* ==========================================================================
+   Estilos de Componentes
+   ========================================================================== */
+
+/* Botão com efeito de gradiente */
 .btn-gradient {
     background-image: linear-gradient(45deg, #B329E5 0%, #8a2be2 100%);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Transição elástica */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     background-size: 200% auto;
 }
+
 .btn-gradient:hover {
-    background-position: right center; /* Muda a posição do gradiente */
+    background-position: right center;
     box-shadow: 0 12px 25px -8px rgba(179, 41, 229, 0.4);
     transform: translateY(-3px);
 }
 
-
-
-/* Estilos para a seção de funcionalidades */
-.feature-button {
-    transition: all 0.3s ease-out;
-    border-left: 3px solid transparent;
-    text-align: right;
-    gap: 6px;
-    font-size: 14px;
-    line-height: 1.2;
-    background: transparent;
-    border: none;
-    width: 100%;
-    transition: all 0.3s ease;
-
-
-}
-.feature-button:not(.active):hover {
-    background-color: var(--soft-purple);
-    color: var(--purple);
-    border-left-color: var(--purple);
-    transform: translateX(5px);
-    
-}
-.feature-button.active {
-    background-color: transparent;
-    color: var(--purple);
-    font-weight: 700;
-    border-left-color: var(--purple);
-}
-
-.feature-content img {
-    width: 80%;
-    height: 450px;
-    object-fit: cover;
-}
-
-/* Planos */
- .Pessoa {
-    background-image: url('https://vtracker.com.br/assets/img/vtracker_plans.png');
-  background-size: cover;
-  background-position: center;
-  width: 100%;
-  height: 300px;
-  }
-
-/* Animação de conteúdo */
-.feature-content { display: none; }
-.feature-content.active { display: block; animation: contentFadeIn 0.6s ease-out forwards; }
-
-@keyframes contentFadeIn { 
-    from { 
-        opacity: 0; 
-        transform: translateY(20px); 
-    } 
-    to { 
-        opacity: 1; 
-        transform: translateY(0); 
-    } 
-}
-
-/* Estilos para o slider de depoimentos */
-.testimonial-slider-track { transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
-.testimonial-dot {
-    transition: all 0.3s ease;
-}
-.testimonial-dot.active { 
-    background-color: var(--purple); 
-    transform: scale(1.25);
-}
-.testimonial-arrow {
-     transition: all 0.3s ease;
-     border-radius: 9999px;
-}
-.testimonial-arrow:hover {
-    background-color: var(--purple);
-    transform: scale(1.1);
-}
-.testimonial-arrow:hover svg {
-    color: white;
-}
-
-/* Estilo da seção Cases de Sucesso */
-/* Estilo base */
-#cases {
-  padding: 4rem 2rem;
-  max-width: 1400px;
-  margin: auto;
-  position: relative;
-}
-
-#cases h2 {
-  text-align: center;
-  font-size: 2rem;
-  color: #6A8095;
-  margin-bottom: 2rem;
-}
-
-.carousel-container {
-  display: flex;
-  overflow-x: hidden;
-  scroll-behavior: smooth;
-  gap: 1rem;
-  padding-bottom: 1rem;
-}
-
-.case-card {
-  min-width: 280px;
-  background: #ffffff;
-  border-radius: 10px;
-  overflow: hidden;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-  transition: transform 0.3s ease;
-  flex-shrink: 0;
-}
-
-.case-card:hover {
-  transform: translateY(-5px);
-}
-
-.case-card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.case-info {
-  padding: 1rem;
-}
-
-.case-info h4 {
-  margin-bottom: 0.5rem;
-  font-size: 1.1rem;
-  color: #6A8095;
-}
-
-.case-info p {
-  font-size: 0.95rem;
-  color: #999999;
-}
-
-/* Setas */
-.carousel-nav {
-  position: absolute;
-  top: 50%;
-  left: 0;
-  right: 0;
-  transform: translateY(-50%);
-  z-index: 2;
-  pointer-events: none;
-}
-
-.nav-arrow {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px;
-  height: 40px;
-  opacity: 0.7;
-  cursor: pointer;
-  transition: transform 0.2s;
-  pointer-events: all;
-  z-index: 3;
-}
-
-.nav-arrow:hover {
-  opacity: 1;
-  transform: translateY(-50%) scale(1.1);
-}
-
-/* Corrigido para ambas ficarem fora */
-.nav-arrow.left {
-  left: -50px; /* Ajuste esse valor conforme necessário */
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.nav-arrow.right {
-  right: -50px; /* Ajuste esse valor conforme necessário */
-}
-
-#precos {
-  font-size: 2rem;
-  background-color: #fbfbfc;
-  margin-bottom: 2rem;
-}
-
+/* Ícone de chat fixo */
 .chat-icon {
-  position: fixed;
-  bottom: 20px;    /* distância do rodapé */
-  right: 20px;      /* distância da borda esquerda */
-  width: 80px;     /* tamanho do ícone */
-  height: 80px;
-  cursor: pointer;
-  z-index: 1000;   /* para ficar sempre acima */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: background-color 0.3s ease;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 80px;
+    height: 80px;
+    cursor: pointer;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
 }
 
 .chat-icon img {
-  width: 80%;  /* ajusta o tamanho da imagem dentro do círculo */
-  height: 70%;
-  object-fit: contain;
-  pointer-events: none; /* para que o clique passe para o link */
+    width: 80%;
+    height: 70%;
+    object-fit: contain;
+    pointer-events: none;
 }
 
 .chat-icon:hover {
-  box-shadow: 0 6px 12px rgba(185, 185, 185, 0.6);
+    box-shadow: 0 6px 12px rgba(185, 185, 185, 0.6);
+    transform: scale(1.1);
 }
 
-/* Suceso do cliente */
-  .onboard-section {
-    background-color: #6A8095;
-    color: #ffffff;
-    padding: 60px 20px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  }
+/* ==========================================================================
+   Seção de Funcionalidades (Com Bloco Centralizado)
+   ========================================================================== */
+.features-section {
+    padding: 80px 0; /* Espaçamento vertical da seção */
+}
 
-  .onboard-section .container {
-    max-width: 1200px;
+/* O container DENTRO da seção de funcionalidades agora tem o estilo visual */
+.features-section .container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 60px; /* Espaçamento interno do bloco */
+    background-color: #ffffff; /* Cor de fundo do bloco */
+    border-radius: 1px; /* Bordas arredondadas */
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.section-header p {
+    font-size: 1.1rem;
+    color: #6c757d;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.features-spotlight-container {
+    display: flex;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+/* Menu Lateral */
+.features-menu-list {
+    flex: 0 0 280px;
+}
+
+.features-menu-list ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: sticky;
+    top: 100px;
+}
+
+.feature-menu-item {
+    display: block;
+    padding: 0.7rem 1.5rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #495057;
+    text-decoration: none;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    border: 2px solid transparent;
+    transition: all 0.3s ease-in-out;
+}
+
+.feature-menu-item.active {
+    color: #0056b3;
+    background-color: #e7f1ff;
+    border-color: #a0c7ff;
+}
+
+/* Conteúdo em Destaque */
+.feature-content-display {
+    flex-grow: 1;
+}
+
+.feature-pane {
+    display: none;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.feature-pane.active {
+    display: block;
+}
+
+.feature-pane img {
+    width: 100%;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+    border: 1px solid #dee2e6;
+}
+
+.feature-pane h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #212529;
+}
+
+.feature-pane p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #495057;
+}
+
+/* ==========================================================================
+   Seção "Cases de Sucesso" - Carrossel
+   ========================================================================== */
+#cases {
+    padding: 4rem 2rem;
+    max-width: 1400px;
+    margin: auto;
+    position: relative;
+}
+
+#cases h2 {
+    text-align: center;
+    font-size: 2rem;
+    color: #6A8095;
+    margin-bottom: 2rem;
+}
+
+.carousel-container {
+    display: flex;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.case-card {
+    min-width: 280px;
+    background: #ffffff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.case-card:hover {
+    transform: translateY(-5px);
+}
+
+.case-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.case-info { padding: 1rem; }
+.case-info h4 { margin-bottom: 0.5rem; font-size: 1.1rem; color: #6A8095; }
+.case-info p { font-size: 0.95rem; color: #999999; }
+
+.nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    pointer-events: all;
+    z-index: 3;
+}
+
+.nav-arrow:hover {
+    opacity: 1;
+    transform: translateY(-50%) scale(1.1);
+}
+
+.nav-arrow.left { left: -50px; transform: translateY(-50%) rotate(180deg); }
+.nav-arrow.right { right: -50px; }
+
+/* ==========================================================================
+   Seção "Sucesso do Cliente" - VERSÃO TECNOLÓGICA E MODERNA
+   ========================================================================== */
+
+#casess {
+  background-color: #ffffff;
+max-width: 100%;
+}
+
+.onboard-section {
+    /* Fundo com gradiente escuro para um visual mais tecnológico */
+    background-image: linear-gradient(145deg, #B329E5 0%, #6A8095 100%);
+    color: #ffffff;
+    /* Mais espaçamento vertical para a seção respirar */
+    padding: 100px 20px;
+    overflow: hidden; /* Garante que os elementos de fundo não vazem */
+    /* Centraliza o conteúdo da seção para melhor distribuição */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    gap: 30px;
+    margin-bottom: 60px;
+    width: 100%;
+    margin-left: auto; /* This centers the grid within its parent */
+    margin-right: auto; /* This centers the grid within its parent */
+}
+
+.onboard-section .container {
+    max-width: 1400px;
+    width: 100%; /* Garante que o container ocupe a largura total disponível */
     margin: 0 auto;
     text-align: center;
-  }
-
-  .onboard-section h2 {
-    font-size: 2.8rem;
-    margin-bottom: 10px;
-    font-weight: 700;
-    color: #ffffff;
-  }
-
-  .onboard-section .subtitle {
-    font-size: 1.25rem;
-    margin-bottom: 40px;
-    color: #B3B4B4;
-  }
-
-.onboard-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-  margin-bottom: 40px;
+    position: relative; /* Necessário para elementos de fundo, se houver */
+    z-index: 2;
+    padding: 0 15px; /* Adiciona um pequeno padding horizontal para evitar que o conteúdo grude nas bordas em telas menores */
 }
 
-  .card {
-    background-color: rgba(255, 255, 255, 0.08);
-    border-radius: 15px;
-    padding: 25px 20px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+.onboard-section h2 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem; /* Ajuste fino */
+    font-weight: 700;
+    color: #ffffff;
+    line-height: 1.2; /* Melhora a legibilidade do título */
+}
+
+.onboard-section .subtitle {
+    font-size: 1.25rem;
+    margin-bottom: 60px; /* Mais espaço antes dos cards */
+    color: #A0AEC0; /* Cor mais suave para o subtítulo */
+    max-width: 600px; /* Aumenta um pouco a largura para melhor leitura */
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6; /* Aumenta a altura da linha para melhor legibilidade */
+}
+
+.onboard-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajusta o minmax para melhor responsividade em telas menores */
+    gap: 30px; /* Aumenta o vão entre os cards */
+    margin-bottom: 40px;
+    width: 100%; /* Garante que os cards ocupem a largura total do container */
+    max-width: 1200px; /* Adiciona um max-width para os cards, centralizando-os em telas muito grandes */
+}
+
+.card {
+    /* Efeito de vidro (Glassmorphism) */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px); /* Para compatibilidade com Safari */
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 30px 25px;
+    text-align: center; /* **Mudado para center para centralizar ícone e texto do card** */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
     cursor: default;
-  }
+    display: flex; /* Adiciona flexbox para alinhar o conteúdo interno */
+    flex-direction: column;
+    align-items: center; /* **Centraliza o conteúdo horizontalmente dentro do card** */
+}
 
-  .card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
-    background-color: rgba(255, 255, 255, 0.12);
-  }
+.card:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.3);
+}
 
-  .icon {
-    font-size: 3rem;
-    margin-bottom: 15px;
-  }
+.icon {
+    font-size: 2.2rem; /* Ícone um pouco menor */
+    margin-bottom: 20px;
+    /* Destaque para o ícone */
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    /* Remover margin-left: auto e margin-right: auto se existirem, pois text-align: center no card já faz o trabalho */
+}
 
-  .card h3 {
-    font-size: 1.3rem;
-    margin-bottom: 10px;
+.card h3 {
+    font-size: 1.4rem; /* Título do card mais proeminente */
+    margin-bottom: 12px;
     font-weight: 600;
     color: #ffffff;
-  }
+    text-align: center; /* **Centraliza o título do card** */
+}
 
-  .card p {
+.card p {
     font-size: 1rem;
-    line-height: 1.4;
-    color: #B3B4B4;
-  }
+    line-height: 1.6; /* Altura de linha maior para legibilidade */
+    color: #ffffff; /* Mesma cor suave do subtítulo */
+    text-align: center; /* **Centraliza o parágrafo do card** */
+}
 
-  .btn-start {
+/* --- */
+/* Estilos para o Botão de Ação */
+.btn-start {
     background-color: #ffffff;
     color: #B329E5;
     border: none;
-    padding: 15px 35px;
+    padding: 14px 35px;
     font-size: 1.2rem;
     font-weight: 700;
     border-radius: 50px;
     cursor: pointer;
     transition: background-color 0.3s ease, color 0.3s ease;
-  }
+}
 
-  .btn-start:hover {
-    background-color: #B329E5;
+.btn-start:hover {
+    background-color: #B329E5; /* Escurece a cor no hover */
     color: #ffffff;
-  }
+    transform: translateY(-3px); /* Leve efeito de elevação */
+    box-shadow: 0 6px 20px rgba(216, 216, 216, 0.6); /* Sombra mais intensa no hover */
+}
 
-  .fade-in {
-    opacity: 1 !important;
-    transform: none !important;
-    transition: opacity 1s ease, transform 1s ease;
-  }
+/* Media Queries para Responsividade */
+@media (max-width: 768px) {
+    .onboard-section {
+        padding: 80px 15px; /* Reduz o padding em telas menores */
+    }
+
+    .onboard-section h2 {
+        font-size: 2.2rem; /* Reduz o tamanho do título */
+    }
+
+    .onboard-section .subtitle {
+        font-size: 1.1rem; /* Reduz o tamanho do subtítulo */
+        margin-bottom: 40px;
+    }
+
+    .onboard-cards {
+        grid-template-columns: 1fr; /* Coluna única em telas muito pequenas */
+        gap: 20px;
+    }
+
+    .card {
+        padding: 25px 20px; /* Ajusta o padding do card */
+    }
+
+    .icon {
+        /* Não precisa de ajustes aqui, pois o card já centraliza */
+    }
+
+    .btn-start {
+        padding: 12px 25px; /* Ajusta o padding do botão em telas menores */
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .onboard-section h2 {
+        font-size: 1.8rem;
+    }
+
+    .onboard-section .subtitle {
+        font-size: 1rem;
+    }
+}
+
+
+#depoimentos {
+  background-image: linear-gradient(145deg, #b3b4b4 50%, #B3B4B4 100%);
+}
+
+/* ==========================================================================
+   Animações e Efeitos
+   ========================================================================== */
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Animação para slider de depoimentos */
+.testimonial-slider-track { transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
+.testimonial-dot { transition: all 0.3s ease; }
+.testimonial-dot.active { background-color: var(--purple); transform: scale(1.25); }
+.testimonial-arrow { transition: all 0.3s ease; border-radius: 9999px; }
+.testimonial-arrow:hover { background-color: var(--purple); transform: scale(1.1); }
+.testimonial-arrow:hover svg { color: white; }
+
+/* ==========================================================================
+   Responsividade
+   ========================================================================== */
+
+@media (max-width: 992px) {
+    /* Ajusta a seção de funcionalidades para telas menores */
+    .features-spotlight-container { flex-direction: column; }
+    .features-menu-list ul { position: static; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    
+    /* Ajusta o padding do container centralizado em telas menores */
+    .features-section .container {
+        padding: 40px 20px;
+    }
+}
