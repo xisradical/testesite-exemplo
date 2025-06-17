@@ -19,10 +19,45 @@ body {
     --soft-purple: #f5e6ff;
 }
 
-#social-proof {
-  background-color:#f8f8f8;
+/* ==========================================================================
+   Movimento na imagem
+   ========================================================================== */
+
+#hero {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  animation: fadeGrowIn 1.2s ease-out forwards;
 }
 
+@keyframes fadeGrowIn {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   Reduzir espaço das logos
+   ========================================================================== */
+   
+#social-proof {
+  background-color: #f8f8f8;
+  position: relative;
+  top: -120px;
+
+  /* Borda no topo */
+  border-top: 1px solid #cfcfcf; /* você pode ajustar a espessura e a cor */
+  
+
+  /* Sombra (atrás da section) */
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15); /* sombra para cima, ajustável */
+}
+
+.expand-container {
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15); /* sombra para cima, ajustável */
+    border-radius: 20px;
+
+}
 
 
 /* ==========================================================================
@@ -84,6 +119,8 @@ body {
    ========================================================================== */
 .features-section {
     padding: 80px 0; /* Espaçamento vertical da seção */
+    position: relative;
+    top: -100px;
 }
 
 /* O container DENTRO da seção de funcionalidades agora tem o estilo visual */
@@ -227,8 +264,8 @@ body {
 }
 
 .case-card img {
-    width: 100%;
-    height: 200px;
+    width: auto;
+    height: 300px;
     object-fit: cover;
 }
 
@@ -284,6 +321,10 @@ max-width: 100%;
     width: 100%;
     margin-left: auto; /* This centers the grid within its parent */
     margin-right: auto; /* This centers the grid within its parent */
+    position: relative;
+    top: -100px;
+    border-top: 1px solid #cfcfcf; /* você pode ajustar a espessura e a cor */
+
 }
 
 .onboard-section .container {
@@ -441,8 +482,14 @@ max-width: 100%;
 }
 
 
+#precos {
+    background-color:#f9fafb;
+;
+}
+
+
 #depoimentos {
-  background-image: linear-gradient(145deg, #b3b4b4 50%, #B3B4B4 100%);
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15); /* sombra para cima, ajustável */
 }
 
 /* ==========================================================================
