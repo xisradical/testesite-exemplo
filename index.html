@@ -10,10 +10,37 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
 
     <link rel="stylesheet" href="css/style.css" />
 </head>
 <body class="text-gray-800">
+
+
+<div id="videoLightbox" class="lightbox">
+  <div class="lightbox-content">
+    <span class="close-lightbox" id="closeVideo">&times;</span>
+    <!-- iframe vazio inicialmente -->
+    <iframe
+      id="videoIframe"
+      width="1400"
+      height="580"
+      src=""
+      title="YouTube video player"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    ></iframe>
+  </div>
+</div>
 
     <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-custom-gray-light">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center"> 
@@ -24,54 +51,67 @@
                 <span class="text-gray-800">v-tracker</span>
             </a> 
 
+
             <nav class="hidden md:flex items-center space-x-8 text-base font-medium">
                 <a href="#funcionalidades" class="text-custom-gray-dark hover:text-custom-purple transition-colors">Funcionalidades</a>
                 <a href="#depoimentos" class="text-custom-gray-dark hover:text-custom-purple transition-colors">Depoimentos</a>
                 <a href="#precos" class="text-custom-gray-dark hover:text-custom-purple transition-colors">Preços</a>
             </nav>
-
             <a href="#contato" class="hidden md:inline-block btn-gradient text-white font-bold py-2 px-5 rounded-lg">
                 Agendar Demonstração
             </a> 
-        </div>
     </header>
 
     <main>
 
-        <section class="container mx-auto px-6 text-center pt-32 pb-24 lg:pt-40 lg:pb-28">
+        <section class="container mx-auto px-6 text-center pt-32 pb-24 lg:pt-40 lg:pb-28" data-aos="fade-up" data-aos-delay="100">
+            <!-- Main Heading -->
+<div class="badge">  <span class="ponto-roxo"></span>
+      Plataforma líder em Social Listening
+    </div>
+
+
   <h1 class="text-4xl md:text-6xl font-extrabold leading-tight mb-6" data-aos="fade-up">
-    Sua plataforma mais completa <br />de Social Listening
+    <p class="frase">
+  Sua plataforma mais completa <br />
+  de <span class="destaque">Social Listening</span>
+</p>
+
   </h1>
 
   <p class="text-lg md:text-xl text-custom-gray-dark max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">
     Transforme conversas em oportunidades e dados em crescimento real com a plataforma de inteligência que sua marca merece.
   </p>
 
+    <div class="botoes" data-aos="fade-up" data-aos-delay="200">
+  <button class="btn contato">Entrar em Contato</button>
+  <button class="btn demo" id="openVideo">
+    <span class="play-icon">▶</span> Ver Demonstração
+  </button>
+</div>
+
   <div class="expand-container" id="hero" data-aos="fade-up" data-aos-delay="200">
     <img
       src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhDII_X0Dj5AozfTe8UFCc7vWJpFhuJrRRv9Hp7Y0C4k14b_iqB1POLTI_MGnZfahrAxc_gKSZvvKiyM27pV-EFuFTb_oXqDI9Lrdr8nRQ4OR1oyP9WfcMYq_J1JBAWdFA8FYC3OZVpK3j3umACWNO8F-usaZfL8_aA-VR_Ggwxm4Htq9jDoFA3CjiqaaY/s1600/image%202.png"
-      alt="Hero Image"
+      alt="Hero Image" 
       class="mx-full w-full shadow-lg"
     />
     
   </div>
 </section>
 
-        <section id="social-proof" class="py-12 bg-white">
-            <div class="container mx-auto px-6">
-                <p class="text-center text-sm font-bold text-custom-gray-dark tracking-wider uppercase" data-aos="fade-up">
-                    Quem confia na V-Tracker para crescer
-                </p> 
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mt-8 items-center" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://imagens.vtracker.com.br/parceiros/oficial_partner.png" width="70%" alt="Logo Meta Official Partner" class="mx-auto grayscale hover:grayscale-0 transition-all duration-300" /> 
-                    <img src="https://imagens.vtracker.com.br/parceiros/selo_abradi.png" width="60%" alt="Logo Selo Abradi" class="mx-auto grayscale hover:grayscale-0 transition-all duration-300" /> 
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqGVAwoJH8uDZlNQy4g9xm0AIflOjaxyY4rFrt_Nbl5A0j3GfFkva-NSqiHIKB0H9tWLbENg_vawDFQ4xVfkIFkUe5ujGGf-mXke5pFuE39uLy7_JYXEQedM2lSoHIA3T3MUXKRw0MXryqCfCy0PEOTIvwDK6dT4S4xpieO4y79G-5i6WpMaem_MdD7cc/s1600/Novo%20Projeto%20%285%29.png" alt="Logo Cliente C" class="mx-auto grayscale hover:grayscale-0 transition-all duration-300" />
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5eh4xgx1xX9W_GfPr1EvKKFiiIqLvRhXwnu76puX0h5fVe1pHuqDcAwmWdri0Z2xT53B1ZQ6KtMEZw2SbsMVB0nQhJH3t11Vn9ru38b8IR2OAJBOraVfUXSE5uRmzFuhrTADdrfr8wE12jmQtKxUfBVDycoWJ9XUDIUD3O31rg0phDbFP-9il_AmaARc/s1600/Novo%20Projeto%20%284%29.png" alt="Logo Cliente D" class="mx-auto grayscale hover:grayscale-0 transition-all duration-300" /> 
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHr4N6IADh3DcfAyjDUGdkxyYGwek5_XZb0kmbrpsLlmuCbz6_dGuWrkWCCJWpOxJuvo5cP7F788tFNtjv1C7BKCH7fnqUIM7E6ld6RpsMGzviHa6aghhW4MYY65kyne_c0eM__VLZadtLwBgcLnNfrOvMdQ9x1VIKs3BPsdn5LFUk9bBKpOMVobSQcmE/s1600/Novo%20Projeto%20%283%29.png" width="60%" alt="Logo Cliente E" class="mx-auto grayscale hover:grayscale-0 transition-all duration-300" /> 
-                    <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2-RLfiCwXWo1MgMRSl5dWuOn79MYEtC1qkR-7iMbCWiHGW6jLBvO7pFPqL-FNmUDX91kXxoDhar5eLUTTUgosuKdC1KyPwCrwflCglSHOcGvWhpe4i18RO8HrxzwOPylP4sweNIhiU2Gdhre3R-pl65jc8gp7yXnG_nPHCmrP9FZohbWoJ3PeTsq0mNo/s1600/Novo%20Projeto%20%282%29.png" width="60%" alt="Logo Cliente F" class="mx-auto grayscale hover:grayscale-0 transition-all duration-300" />
-                </div>
-            </div>
-        </section>
+<section id="social-proof" class="py-12 bg-white">
+    <div class="container mx-auto px-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mt-8 items-center" data-aos="fade-up" data-aos-delay="100">
+      <img src="https://imagens.vtracker.com.br/parceiros/oficial_partner.png" alt="Logo Meta Official Partner" class="logo-parceiro" />
+      <img src="https://imagens.vtracker.com.br/parceiros/selo_abradi.png" alt="Logo Selo Abradi" class="logo-parceiro" />
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjqGVAwoJH8uDZlNQy4g9xm0AIflOjaxyY4rFrt_Nbl5A0j3GfFkva-NSqiHIKB0H9tWLbENg_vawDFQ4xVfkIFkUe5ujGGf-mXke5pFuE39uLy7_JYXEQedM2lSoHIA3T3MUXKRw0MXryqCfCy0PEOTIvwDK6dT4S4xpieO4y79G-5i6WpMaem_MdD7cc/s1600/Novo%20Projeto%20%285%29.png" alt="Logo Cliente C" class="logo-parceiro" />
+      <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj5eh4xgx1xX9W_GfPr1EvKKFiiIqLvRhXwnu76puX0h5fVe1pHuqDcAwmWdri0Z2xT53B1ZQ6KtMEZw2SbsMVB0nQhJH3t11Vn9ru38b8IR2OAJBOraVfUXSE5uRmzFuhrTADdrfr8wE12jmQtKxUfBVDycoWJ9XUDIUD3O31rg0phDbFP-9il_AmaARc/s1600/Novo%20Projeto%20%284%29.png" alt="Logo Cliente D" class="logo-parceiro" />
+      <img width="50%" height="auto" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjHr4N6IADh3DcfAyjDUGdkxyYGwek5_XZb0kmbrpsLlmuCbz6_dGuWrkWCCJWpOxJuvo5cP7F788tFNtjv1C7BKCH7fnqUIM7E6ld6RpsMGzviHa6aghhW4MYY65kyne_c0eM__VLZadtLwBgcLnNfrOvMdQ9x1VIKs3BPsdn5LFUk9bBKpOMVobSQcmE/s1600/Novo%20Projeto%20%283%29.png" alt="Logo Cliente E" class="logo-parceiro" />
+      <img width="50%" height="auto" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh2-RLfiCwXWo1MgMRSl5dWuOn79MYEtC1qkR-7iMbCWiHGW6jLBvO7pFPqL-FNmUDX91kXxoDhar5eLUTTUgosuKdC1KyPwCrwflCglSHOcGvWhpe4i18RO8HrxzwOPylP4sweNIhiU2Gdhre3R-pl65jc8gp7yXnG_nPHCmrP9FZohbWoJ3PeTsq0mNo/s1600/Novo%20Projeto%20%282%29.png" alt="Logo Cliente F" class="logo-parceiro" />
+        </div>
+    </div>
+</section>
 
         <section id="onboard" class="onboard-section">
             <div class="container">
@@ -116,7 +156,7 @@
         <section id="funcionalidades" class="features-section" data-aos="fade-up" data-aos-delay="200">
             <div class="container">
                 <div class="section-header">
-                    <h2>Conheça o poder da nossa plataforma</h2>
+                    <h2>Conheça o poder da <span class="destaque">nossa plataforma</span></h2>
                     <p>Todas as ferramentas que você precisa para tomar as melhores decisões, em um só lugar.</p> 
                 </div>
                 <div class="features-spotlight-container">
@@ -192,21 +232,52 @@
 
 
 
-        <section id="press" class="py-20 bg-gray-50/70" id="hero" data-aos="fade-up" data-aos-delay="200">
-            <div class="container mx-auto px-6">
-                <p class="text-center text-sm font-bold text-custom-gray-dark tracking-wider uppercase" data-aos="fade-up">
+<section id="press" class="py-20 bg-gray-50/70" data-aos="fade-up" data-aos-delay="200">
+    <div class="container mx-auto px-6">
+        <div class="flex flex-col lg:flex-row gap-12 items-center">
+            <!-- Coluna de Texto -->
+            <div class="lg:w-1/2" data-aos="fade-right">
+                <p class="text-sm font-bold text-custom-gray-dark tracking-wider uppercase mb-4">
                     Saímos na imprensa
-                </p> 
-                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 mt-8 items-center" data-aos="fade-up" data-aos-delay="100">
-                    <img src="https://vtracker.com.br/assets/img/news/black_friday_3.png" alt="Logo Mídia 1" class="mx-auto grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300" /> 
-                    <img src="https://vtracker.com.br/assets/img/news/black_friday_2.png" alt="Logo Mídia 2" class="mx-auto grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-                    <img src="https://vtracker.com.br/assets/img/news/black_friday.png" alt="Logo Mídia 3" class="mx-auto grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300" /> 
-                    <img src="https://vtracker.com.br/assets/img/news/diversidade.png" alt="Logo Mídia 4" class="mx-auto grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300" />
-                    <img src="https://vtracker.com.br/assets/img/folha.png" alt="Logo Mídia 5" class="mx-auto grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300" /> 
-                    <img src="https://vtracker.com.br/assets/img/valor.png" alt="Logo Mídia 6" class="mx-auto grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300" /> 
+                </p>
+                <h2 class="text-3xl font-bold text-gray-800 mb-6">
+                    Reconhecimento da mídia
+                </h2>
+                <p class="text-gray-600 mb-6">
+                    Nossa empresa tem sido destaque em diversos veículos de comunicação por nossa inovação e impacto no mercado.
+                </p>
+                <p class="text-gray-600">
+                    Essas matérias reforçam nosso compromisso com a excelência e a transformação digital que proporcionamos aos nossos clientes.
+                </p>
+            </div>
+            
+            <!-- Coluna do Carrossel -->
+            <div class="lg:w-1/2 w-full" data-aos="fade-left">
+                <div class="press-carousel">
+                    <div class="px-4">
+                        <img src="https://vtracker.com.br/assets/img/news/black_friday_3.png" alt="Logo Mídia 1" class="mx-auto grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 max-h-64 object-contain" />
+                    </div>
+                    <div class="px-4">
+                        <img src="https://vtracker.com.br/assets/img/news/black_friday_2.png" alt="Logo Mídia 2" class="mx-auto grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 max-h-64 object-contain" />
+                    </div>
+                    <div class="px-4">
+                        <img src="https://vtracker.com.br/assets/img/news/black_friday.png" alt="Logo Mídia 3" class="mx-auto grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 max-h-64 object-contain" />
+                    </div>
+                    <div class="px-4">
+                        <img src="https://vtracker.com.br/assets/img/news/diversidade.png" alt="Logo Mídia 4" class="mx-auto grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 max-h-64 object-contain" />
+                    </div>
+                    <div class="px-4">
+                        <img src="https://vtracker.com.br/assets/img/folha.png" alt="Logo Mídia 5" class="mx-auto grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 max-h-64 object-contain" />
+                    </div>
+                    <div class="px-4">
+                        <img src="https://vtracker.com.br/assets/img/valor.png" alt="Logo Mídia 6" class="mx-auto grayscale opacity-70 hover:opacity-100 hover:grayscale-0 transition-all duration-300 max-h-64 object-contain" />
+                    </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
+</section>
+
 
         <section id="casess" id="hero">
         <section id="cases">

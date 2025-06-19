@@ -174,3 +174,92 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
 
+ const openBtn = document.getElementById("openVideo");
+const closeBtn = document.getElementById("closeVideo");
+const lightbox = document.getElementById("videoLightbox");
+const iframe = document.getElementById("videoIframe");
+
+const videoUrlBase = "https://www.youtube.com/embed/_-OkIOClkiE?si=HRQl8KU139pygAMQ";
+
+openBtn.addEventListener("click", () => {
+  lightbox.style.display = "flex";
+  iframe.src = videoUrlBase + "&autoplay=1";
+  document.body.style.overflow = "hidden"; // trava o fundo
+});
+
+closeBtn.addEventListener("click", () => {
+  lightbox.style.display = "none";
+  iframe.src = "";
+  document.body.style.overflow = "auto"; // libera o fundo
+});
+
+
+
+ if (localStorage.getItem('theme') === 'dark' || 
+        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+        document.documentElement.classList.add('dark');
+    }
+
+    // Função para alternar entre light e dark mode
+    function toggleTheme() {
+        const html = document.documentElement;
+        if (html.classList.contains('dark')) {
+            html.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+        } else {
+            html.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+        }
+    }
+
+        $(document).ready(function(){
+        $('.press-carousel').slick({
+            dots: true,
+            infinite: true,
+            speed: 300,
+            slidesToShow: 1,
+            centerMode: true,
+            variableWidth: true,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            arrows: false
+        });
+    });
+
+
+
+    function protegerSectionPrecos() {
+    const section = document.getElementById('precos');
+
+    // Remove classes herdadas se existirem
+    section.classList.remove('dark:bg-gray-900', 'dark', 'bg-gray-800');
+    
+    // Garante o fundo branco e textos escuros
+    section.style.backgroundColor = '#ffffff'; // ou use uma classe
+    section.querySelectorAll('*').forEach(el => {
+      el.style.color = '';
+      if (el.classList.contains('dark:text-white') || el.classList.contains('dark:text-gray-200')) {
+        el.classList.remove('dark:text-white', 'dark:text-gray-200');
+        el.classList.add('text-gray-800');
+      }
+    });
+  }
+
+  // Executa no carregamento
+  document.addEventListener('DOMContentLoaded', () => {
+    protegerSectionPrecos();
+  });
+
+  // Reexecuta sempre que o tema for trocado
+  function toggleTheme() {
+    const html = document.documentElement;
+    const isDark = html.classList.contains('dark');
+    html.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'light' : 'dark');
+
+    // Protege a seção após a mudança de tema
+    protegerSectionPrecos();
+
+    // Se usar AOS
+    if (typeof AOS !== 'undefined') AOS.refresh();
+  }

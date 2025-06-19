@@ -32,7 +32,10 @@ body {
   opacity: 0;
   transform: translateY(40px) scale(0.98);
   animation: fadeGrowIn 1.2s ease-out forwards;
+  width: 1200px;
+  margin: 0 auto; /* 👈 centraliza horizontalmente */
 }
+
 
 @keyframes fadeGrowIn {
   to {
@@ -41,7 +44,157 @@ body {
   }
 }
 
+ /* Lightbox geral */
+.lightbox {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.9);
+  z-index: 99999;
+  justify-content: center;
+  align-items: center;
+}
 
+/* Container interno do vídeo */
+.lightbox-content {
+  position: relative;
+  width: 80vw;
+  height: 80vh;
+  max-width: 960px;
+  max-height: 90vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Iframe do vídeo */
+.lightbox iframe {
+  border-radius: 10px;
+  border: none;
+}
+
+/* Botão de fechar fixo no topo direito */
+.close-lightbox {
+  position: fixed;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: white;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 100000;
+}
+
+
+.badge {
+      display: inline-flex;
+      align-items: center;
+      background-color: #f9f9f9; /* branco levemente acinzentado */
+      padding: 6px 11px;
+      border-radius: 50px; /* borda arredondada */
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* sombra suave */
+      font-family: 'Inter', sans-serif;
+      font-size: 1.0rem;
+      font-weight: 500;
+      color: #333;
+      transition: all 0.3s ease;
+      cursor: default;
+      margin-bottom: 10px; /* ou o valor que preferir */
+    }
+
+    .badge:hover {
+      transform: scale(1.02); /* leve aumento */
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* sombra mais forte no hover */
+    }
+
+    .ponto-roxo {
+      width: 10px;
+      height: 10px;
+      background-color: #8a2be2; /* roxo */
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+.frase {
+  font-family: 'Inter', sans-serif;
+  font-size: 3.5rem;
+  color: #333;
+  line-height: 1.4;
+  text-align: center;
+  max-width: 1000px;
+  margin: 40px auto;
+}
+
+.destaque {
+  font-weight: 700;
+  background: linear-gradient(90deg, #8a2be2, #a86cf3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 2px rgba(138, 43, 226, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.destaque:hover {
+  text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+  transform: scale(1.03);
+}
+
+
+.botoes {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  margin-top: 30px;
+  margin-bottom: 40px;
+}
+
+.btn {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* Botão Entrar em Contato */
+.contato {
+  background-color: #8a2be2;
+  color: white;
+}
+
+.contato:hover {
+  background-color: #7320c9; /* tom mais escuro */
+}
+
+/* Botão Ver Demonstração */
+.demo {
+  background-color: white;
+  color: #8a2be2;
+  border: 2px solid #8a2be2;
+}
+
+.demo:hover {
+  background-color: #8a2be2;
+  color: white;
+}
+
+/* Ícone de play */
+.play-icon {
+  font-size: 1.1rem;
+  margin-right: 8px;
+  display: inline-block;
+}
 
 
 /* ==========================================================================
@@ -51,14 +204,45 @@ body {
 #social-proof {
   background-color: #f8f8f8;
   position: relative;
-  top: -120px;
+  top: -125px;
+  border-top: 1px solid #cfcfcf;
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15);
+     height: 300px;           /* Altura fixa */
+    min-height: 140px;       /* Altura mínima */
+    max-height: 140px;       /* Altura máxima */
+}
 
-  /* Borda no topo */
-  border-top: 1px solid #cfcfcf; /* você pode ajustar a espessura e a cor */
-  
+/* Classe base para todas as logos */
+.logo-parceiro {
+  display: block;
+  margin: 0 auto;
+  max-height: 35px;
+  max-width: 100%;
+  filter: grayscale(100%);
+  transition: all 0.3s ease;
+  margin-top:-75px;
+}
 
-  /* Sombra (atrás da section) */
-  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15); /* sombra para cima, ajustável */
+/* Remove o grayscale ao passar o mouse */
+.logo-parceiro:hover {
+  filter: grayscale(0%);
+}
+
+/* Responsividade */
+@media (min-width: 768px) {
+  .logo-parceiro {
+    max-height: 30px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .logo-parceiro {
+    max-height: 140px;
+  }
+}
+
+.logo-grande {
+  max-height: 70px;
 }
 
 /* ==========================================================================
@@ -116,9 +300,7 @@ body {
 }
 
 
-
-
-
+ 
 /* ==========================================================================
    Seção de Funcionalidades (Com Bloco Centralizado)
    ========================================================================== */
@@ -327,7 +509,7 @@ max-width: 100%;
     margin-left: auto; /* This centers the grid within its parent */
     margin-right: auto; /* This centers the grid within its parent */
     position: relative;
-    top: -100px;
+    top: -120px;
     border-top: 1px solid #cfcfcf; /* você pode ajustar a espessura e a cor */
 
 }
@@ -528,3 +710,205 @@ max-width: 100%;
         padding: 40px 20px;
     }
 }
+
+
+
+  /* ==========================================================================
+           Configurações Globais e Variáveis de Cor
+           ========================================================================== */
+        
+        /* Modo Light (padrão) */
+        :root {
+            --purple: #B329E5;
+            --dark-gray: #6A8095;
+            --light-gray: #B3B4B4;
+            --soft-purple: #f5e6ff;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f8f8f8;
+            --bg-tertiary: #f9fafb;
+            --text-primary: #000000;
+            --text-secondary: #6A8095;
+            --border-primary: #cfcfcf;
+            --card-bg: #ffffff;
+            --features-bg: #ffffff;
+            --testimonials-bg: #ffffff;
+            --badge-bg: #f9f9f9;
+            --badge-text: #333333;
+        }
+        
+        /* Modo Dark */
+        .dark {
+            --purple: #B329E5;
+            --dark-gray: #9e9e9e;
+            --light-gray: #616161;
+            --soft-purple: #26003a;
+            --bg-primary: #000000;
+            --bg-secondary: #1e1e1e;
+            --bg-tertiary: #2d2d2d;
+            --text-primary: #e0e0e0;
+            --text-secondary: #b0b0b0;
+            --border-primary: #333333;
+            --card-bg: #2d2d2d;
+            --features-bg: #000000;
+            --testimonials-bg: #1e1e1e;
+            --badge-bg: #333333;
+            --badge-text: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            scroll-behavior: smooth;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* ==========================================================================
+           Componentes com Variáveis CSS
+           ========================================================================== */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            background-color: var(--badge-bg);
+            padding: 6px 11px;
+            border-radius: 50px;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+            font-family: 'Inter', sans-serif;
+            font-size: 1.0rem;
+            font-weight: 500;
+            color: var(--badge-text);
+            transition: all 0.3s ease;
+            cursor: default;
+            margin-bottom: 10px;
+        }
+
+        .frase {
+            font-family: 'Inter', sans-serif;
+            font-size: 3.5rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+            text-align: center;
+            max-width: 1000px;
+            margin: 40px auto;
+        }
+
+        #social-proof {
+            background-color: var(--bg-secondary);
+            position: relative;
+            top: -125px;
+            border-top: 1px solid var(--border-primary);
+            box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .features-section .container {
+            background-color: var(--features-bg);
+        }
+
+        .section-header h2 {
+            color: var(--text-primary);
+        }
+
+        .section-header p {
+            color: var(--text-secondary);
+        }
+
+        .feature-menu-item {
+            color: var(--text-secondary);
+        }
+
+        .feature-menu-item.active {
+            color: #0056b3;
+            background-color: #e7f1ff;
+        }
+
+        .feature-pane h3 {
+            color: var(--text-primary);
+        }
+
+        .feature-pane p {
+            color: var(--text-secondary);
+        }
+
+        .case-card {
+            background: var(--card-bg);
+        }
+
+        .case-info h4 {
+            color: var(--text-secondary);
+        }
+
+        #depoimentos {
+            background-color: var(--testimonials-bg);
+        }
+
+        #precos {
+            background-color: var(--bg-tertiary);
+        }
+
+        /* ==========================================================================
+           Toggle Switch
+           ========================================================================== */
+        .theme-toggle {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .theme-toggle input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .theme-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 34px;
+        }
+
+        .theme-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked + .theme-slider {
+            background-color: var(--purple);
+        }
+
+      
+
+        .theme-icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 14px;
+        }
+
+        .sun-icon {
+            left: 8px;
+            color: #f1c40f;
+        }
+
+        .moon-icon {
+            right: 8px;
+            color: #f5f5f5;
+        }
+
+
+
+        
