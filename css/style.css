@@ -4,19 +4,435 @@
 
 /* Define a fonte Inter como padrão e adiciona suavização de fonte. */
 body {
-    font-family: 'Inter', sans-serif;
-    background-color: #ffffff; /* Fundo geral da página */
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  font-family: 'Inter', sans-serif;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* As cores de fundo e texto são definidas pelas variáveis abaixo */
+  background-color: var(--bg-color-primary);
+  color: var(--text-color-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Smooth transition */
 }
 
-/* Centraliza as variáveis de cor para fácil manutenção. */
+/* Centraliza as variáveis de cor para fácil manutenção e define o tema padrão (light mode). */
 :root {
-    --purple: #B329E5;
-    --dark-gray: #6A8095;
-    --light-gray: #B3B4B4;
-    --soft-purple: #f5e6ff;
+  /* Cores gerais */
+  --purple: #B329E5;
+  /* Manter se usado em outros lugares, mas consolidar com --main-purple */
+  --dark-gray: #6A8095;
+  /* Manter se usado em outros lugares, mas consolidar */
+  --light-gray: #B3B4B4;
+  /* Manter se usado em outros lugares, mas consolidar */
+  --soft-purple: #f5e6ff;
+  /* Manter se usado em outros lugares, mas consolidar */
+  --dark-white: #ffffff;
+  /* Manter se usado em outros lugares, mas consolidar */
+
+  /* Variáveis para Light Mode */
+  --bg-color-primary: #ffffff;
+  --bg-color-secondary: #f9fafb;
+  /* bg-gray-50/70 */
+  --text-color-primary: #1f2937;
+  /* gray-800 */
+  --text-color-secondary: #4b5563;
+  /* gray-600 */
+  --text-color-dark-gray: #3d3d3d;
+  /* custom-gray-dark */
+  --text-color-dark-white: #ffffff;
+  /* custom-white-dark */
+  --border-color-light: #e5e7eb;
+  /* custom-gray-light */
+  --main-purple: #6b46c1;
+  /* Consolidado: substitui --purple-color */
+  --footer-bg: #1f2937;
+  /* gray-800 */
+  --footer-text: #d1d5db;
+  /* gray-300 */
+  --footer-border: #374151;
+  /* gray-700 */
+  --custom-white-dark: #f5f5f5;
+  --custom-dark-white': #ffffff;
+
+  /* Variáveis para filtros de imagem no light mode */
+  --purple-filter-strength: 0%;
+}
+
+/* Dark mode styles - Apply the 'dark-mode' class to the <body> */
+body.dark-mode {
+  --bg-color-primary: #1a202c;
+  /* Dark background for body/sections */
+  --bg-color-secondary: #2d3748;
+  /* Slightly lighter dark for alternating sections */
+  --text-color-primary: #e2e8f0;
+  /* Light text */
+  --text-color-secondary: #a0aec0;
+  /* Lighter gray text */
+  --text-color-dark-gray: #a0aec0;
+  /* Custom gray text for dark mode */
+  --border-color-light: #4a5568;
+  /* Darker border */
+  --main-purple: #9f7aea;
+  /* Lighter purple for highlight */
+  --footer-bg: #000000;
+  /* Even darker footer */
+  --footer-text: #cbd5e0;
+  /* Lighter footer text */
+  --footer-border: #2d3748;
+  /* Darker footer border */
+
+  /* Variáveis para filtros de imagem no dark mode */
+  --purple-filter-strength: 70%;
+  /* Inverte para dark mode */
+}
+
+/* ==========================================================================
+   Estilos de Elementos Gerais (após variáveis)
+   ========================================================================== */
+
+header {
+  background-color: var(--bg-color-primary);
+  border-bottom-color: var(--border-color-light);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+header a,
+header span {
+  /* Generalize for all header links/spans */
+  color: var(--text-color-primary);
+}
+
+header a.hover\:text-custom-purple:hover,
+header button#theme-toggle.hover\:text-custom-purple:hover {
+  color: var(--main-purple);
+  /* Usando a variável consolidada */
+}
+
+.text-custom-gray-dark {
+  color: var(--text-color-dark-gray);
+}
+
+.destaque {
+  font-weight: 700;
+  /* Se você quer que o gradiente mude com o tema, precisaria de variáveis para as cores do gradiente.
+       Se é um gradiente fixo de destaque, manter as cores fixas pode ser OK. */
+  background: linear-gradient(90deg, #8a2be2, #a86cf3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 1px 1px 2px rgba(138, 43, 226, 0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  cursor: pointer;
+}
+
+.destaque:hover {
+  text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
+  transform: scale(1.03);
+}
+
+.ponto-roxo {
+  width: 10px;
+  height: 10px;
+  background-color: var(--main-purple);
+  /* Usando a variável consolidada */
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.btn-gradient {
+  background: linear-gradient(to right, var(--main-purple), #805ad5);
+  /* Usando a variável consolidada */
+}
+
+/* --- Regras CSS para as seções e cards --- */
+
+#press,
+.onboard-section {
+  background-color: var(--bg-color-secondary);
+  /* Fundo da seção, usa a cor secundária */
+  color: var(--text-color-primary);
+  /* Cor do texto principal dentro dessas seções */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Adiciona transição suave */
+}
+
+.onboard-cards .card {
+  background-color: var(--bg-color-primary);
+  /* Fundo dos cards, usa a cor primária */
+  color: var(--text-color-primary);
+  /* Cor do texto principal nos cards */
+  border: 1px solid var(--border-color-light);
+  /* Borda dos cards */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  /* Adiciona transição suave */
+}
+
+.onboard-cards .card h3 {
+  color: var(--text-color-primary);
+  /* Título H3 dos cards, usa a cor primária */
+}
+
+.onboard-cards .card p,
+#press p.text-gray-600,
+.onboard-section .subtitle,
+.feature-pane p {
+  color: var(--text-color-secondary);
+  /* Parágrafos e subtítulos, usam a cor secundária */
+}
+
+/* Regras específicas para os títulos da seção Onboard e Press (se não tiver já no CSS principal) */
+.onboard-section h2,
+#press h2 {
+  color: var(--text-color-primary);
+  /* Garante que os H2 usem a cor de texto primária */
+}
+
+/* Botão "Quero começar agora!" na seção Onboard */
+.onboard-section .btn-start {
+  background-color: var(--main-purple);
+  /* Usa a cor roxa principal */
+  color: #ffffff;
+  /* Cor do texto do botão sempre branca para contraste */
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out;
+}
+
+.onboard-section .btn-start:hover {
+  background-color: #805ad5;
+  /* Um roxo um pouco mais escuro no hover */
+}
+
+/* Ícones dos cards do onboard */
+.onboard-cards .card .icon {
+  /* Emojis como 🆓🚀💬📈⭐🤖 não mudam de cor com CSS */
+  /* Se fossem SVGs, você poderia definir a cor aqui: */
+  /* color: var(--main-purple); ou color: var(--text-color-primary); */
+}
+
+
+/* --- Estilos para a seção de funcionalidades --- */
+
+/* Estilos da Seção de Funcionalidades - Já usam suas variáveis */
+.features-section {
+  background-color: var(--bg-color-primary);
+  /* Fundo da seção */
+  color: var(--text-color-primary);
+  /* Cor do texto principal (títulos, etc.) */
+  transition: background-color 0.3s ease, color 0.3s ease;
+  /* Transição para o tema */
+}
+
+.features-section .section-header h2 {
+  color: var(--text-color-primary);
+  /* Título principal H2 da seção */
+}
+
+.features-section .section-header p {
+  color: var(--text-color-secondary);
+  /* Parágrafo de descrição abaixo do H2 */
+}
+
+.feature-menu-list {
+  /* Mantenha seus estilos de layout aqui */
+}
+
+.feature-menu-list ul {
+  /* Mantenha seus estilos de lista aqui */
+}
+
+.feature-menu-item {
+  color: var(--text-color-dark-gray);
+  /* Usando a variável */
+  background-color: var(--bg-color-secondary);
+  /* Fundo dos botões (sua cor secundária) */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  /* Transição suave */
+  display: block;
+  padding: 0.7rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-decoration: none;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+  border: 2px solid transparent;
+  transition: all 0.3s ease-in-out;
+}
+
+.feature-menu-item:hover {
+  background-color: var(--border-color-light);
+  /* Fundo no hover (sua cor de borda light) */
+  color: var(--main-purple);
+  /* Cor do texto no hover (seu roxo principal) */
+}
+
+.feature-menu-item.active {
+  background-color: var(--main-purple);
+  /* Fundo do botão ativo (seu roxo principal) */
+  color: #ffffff;
+  /* Cor do texto do botão ativo (branco puro) */
+  border-color: var(--main-purple);
+  /* Adicionado borda ativa com a mesma cor do fundo */
+}
+
+.feature-content-display {
+  background-color: var(--bg-color-primary);
+  /* Fundo do painel de conteúdo (sua cor primária) */
+  color: var(--text-color-primary);
+  /* Cor do texto principal do painel */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  /* Transição suave */
+}
+
+.feature-pane h3 {
+  color: var(--text-color-primary);
+  /* Título H3 do painel */
+}
+
+.feature-pane p {
+  color: var(--text-color-secondary);
+  /* Parágrafo de descrição do painel */
+}
+
+/* Nota: A imagem dentro de .feature-pane (img) precisaria de um filtro CSS se você quisesse que ela mudasse de cor no dark mode.
+   Se for uma imagem representativa (como um mockup de interface), geralmente não se altera. */
+
+
+.carousel-nav .nav-arrow {
+  filter: invert(var(--purple-filter-strength));
+  /* Ajustado para dark mode com variável */
+}
+
+.case-card {
+  background-color: var(--bg-color-primary);
+  color: var(--text-color-primary);
+  border: 1px solid var(--border-color-light);
+  /* Added border for better contrast in dark mode */
+}
+
+.case-info h4 {
+  color: var(--text-color-primary);
+}
+
+.case-info p {
+  color: var(--text-color-secondary);
+}
+
+#contato {
+  background-color: var(--main-purple);
+  /* Usando a variável consolidada */
+}
+
+#contato p.opacity-90 {
+  color: var(--footer-text);
+}
+
+#contato a.bg-white {
+  color: var(--light-gray);
+  /* Usando a variável consolidada */
+}
+
+footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+}
+
+footer h4,
+footer h5 {
+  color: var(--text-color-primary);
+}
+
+footer ul a {
+  color: var(--text-color-dark-gray);
+}
+
+footer ul a:hover {
+  color: var(--text-color-primary);
+}
+
+footer .border-gray-700 {
+  border-color: var(--footer-border);
+}
+
+/* --- Estilos para a seção de depoimentos e seus elementos --- */
+
+/* Ajuste para a seção de depoimentos no modo escuro */
+#depoimentos {
+  background-color: var(--bg-color-primary);
+  /* Usa a cor de fundo primária (clara ou escura) */
+  color: var(--text-color-primary);
+  /* Usa a cor de texto primária */
+}
+
+/* Cabeçalho H2 dentro de #depoimentos */
+#depoimentos h2 {
+  color: var(--text-color-primary);
+  /* Garante que o H2 use a cor de texto primária */
+}
+
+/* Parágrafo de descrição dentro de #depoimentos */
+#depoimentos p.text-custom-gray-dark {
+  color: var(--text-color-secondary);
+  /* Usa a cor de texto secundária */
+}
+
+/* Contêiner do depoimento (onde fica o fundo bg-gray-50 e a borda) */
+#depoimentos .bg-gray-50 {
+  background-color: var(--bg-color-secondary);
+  /* Usa a cor de fundo secundária */
+}
+
+#depoimentos .border-gray-200 {
+  border-color: var(--border-color-light);
+  /* Usa a cor de borda light */
+}
+
+/* Parágrafo do depoimento em si */
+#depoimentos p.text-custom-gray-dark.flex-grow {
+  color: var(--text-color-primary);
+  /* O texto do depoimento é importante, pode ser primário */
+}
+
+/* Nome da pessoa no depoimento */
+#depoimentos p.font-bold {
+  color: var(--text-color-primary);
+  /* Nome é texto primário */
+}
+
+/* Cargo da pessoa no depoimento */
+#depoimentos p.text-sm {
+  color: var(--text-color-secondary);
+  /* Cargo é texto secundário */
+}
+
+/* Botões de seta do depoimento */
+.testimonial-arrow {
+  background-color: var(--bg-color-primary);
+  /* Fundo da seta igual ao da seção */
+  color: var(--text-color-dark-gray);
+  /* Cor do ícone da seta (cinza escuro ou cinza claro) */
+  border: 1px solid var(--border-color-light);
+  /* Borda da seta */
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+  /* Transição suave */
+}
+
+.testimonial-arrow:hover {
+  background-color: var(--border-color-light);
+  /* Fundo da seta no hover (borda light) */
+  color: var(--main-purple);
+  /* Cor do ícone da seta no hover (roxo) */
+}
+
+/* Dots de navegação do depoimento */
+.testimonial-dot {
+  background-color: var(--border-color-light);
+  /* Cor dos dots inativos (borda light) */
+  transition: background-color 0.3s ease;
+  /* Transição suave */
+}
+
+.testimonial-dot.active {
+  background-color: var(--main-purple);
+  /* Cor do dot ativo (roxo) */
 }
 
 /* ==========================================================================
@@ -24,8 +440,9 @@ body {
    ========================================================================== */
 
 .expand-container {
-  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15); /* sombra para cima, ajustável */
-    border-radius: 20px;
+  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15);
+  /* sombra para cima, ajustável */
+  border-radius: 20px;
 }
 
 #hero {
@@ -33,9 +450,8 @@ body {
   transform: translateY(40px) scale(0.98);
   animation: fadeGrowIn 1.2s ease-out forwards;
   width: 1200px;
-  margin: 0 auto; /* 👈 centraliza horizontalmente */
+  margin: 0 auto;
 }
-
 
 @keyframes fadeGrowIn {
   to {
@@ -44,7 +460,11 @@ body {
   }
 }
 
- /* Lightbox geral */
+/* ==========================================================================
+   Ver demonstração - Vídeo lightbox
+   ========================================================================== */
+
+/* Lightbox geral */
 .lightbox {
   display: none;
   position: fixed;
@@ -89,63 +509,52 @@ body {
   z-index: 100000;
 }
 
+.frase {
+  color: var(--text-color-primary);
+  /* Usando variável para tema */
+  transition: all 0.3s ease;
+}
+
+.badge2 {
+  display: inline-flex;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.0rem;
+  font-weight: 500;
+  color: var(--text-color-primary);
+  /* Usando variável para tema */
+  transition: all 0.3s ease;
+}
 
 .badge {
-      display: inline-flex;
-      align-items: center;
-      background-color: #f9f9f9; /* branco levemente acinzentado */
-      padding: 6px 11px;
-      border-radius: 50px; /* borda arredondada */
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1); /* sombra suave */
-      font-family: 'Inter', sans-serif;
-      font-size: 1.0rem;
-      font-weight: 500;
-      color: #333;
-      transition: all 0.3s ease;
-      cursor: default;
-      margin-bottom: 10px; /* ou o valor que preferir */
-    }
-
-    .badge:hover {
-      transform: scale(1.02); /* leve aumento */
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); /* sombra mais forte no hover */
-    }
-
-    .ponto-roxo {
-      width: 10px;
-      height: 10px;
-      background-color: #8a2be2; /* roxo */
-      border-radius: 50%;
-      margin-right: 10px;
-    }
-
-.frase {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--bg-color-secondary);
+  /* Usando variável para tema */
+  padding: 6px 11px;
+  border-radius: 50px;
+  /* borda arredondada */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  /* sombra suave */
   font-family: 'Inter', sans-serif;
-  font-size: 3.5rem;
-  color: #333;
-  line-height: 1.4;
-  text-align: center;
-  max-width: 1000px;
-  margin: 40px auto;
-}
-
-.destaque {
-  font-weight: 700;
-  background: linear-gradient(90deg, #8a2be2, #a86cf3);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 1px 1px 2px rgba(138, 43, 226, 0.2);
+  font-size: 1.0rem;
+  font-weight: 500;
+  color: var(--text-color-primary);
+  /* Usando variável para tema */
   transition: all 0.3s ease;
-  position: relative;
-  cursor: pointer;
+  cursor: default;
+  margin-bottom: 40px;
+  /* ou o valor que preferir */
 }
 
-.destaque:hover {
-  text-shadow: 0 0 10px rgba(138, 43, 226, 0.5);
-  transform: scale(1.03);
+.badge:hover {
+  transform: scale(1.02);
+  /* leve aumento */
+  box-shadow: 0 4px 12px rgba(116, 116, 116, 0.15);
+  /* sombra mais forte no hover */
 }
 
 
+/* Botões */
 .botoes {
   display: flex;
   gap: 16px;
@@ -154,6 +563,7 @@ body {
   margin-bottom: 40px;
 }
 
+/* Botão Entrar em Contato */
 .btn {
   font-family: 'Inter', sans-serif;
   font-size: 1rem;
@@ -167,25 +577,44 @@ body {
   align-items: center;
 }
 
+.btn2 {
+  font-family: 'Inter', sans-serif;
+  font-size: 1rem;
+  padding: 6px 12px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+}
+
 /* Botão Entrar em Contato */
 .contato {
-  background-color: #8a2be2;
+  background-color: var(--main-purple);
+  /* Usando a variável consolidada */
   color: white;
 }
 
 .contato:hover {
-  background-color: #7320c9; /* tom mais escuro */
+  background-color: #7320c9;
+  /* tom mais escuro, pode ser outra variável se desejar */
 }
 
 /* Botão Ver Demonstração */
 .demo {
-  background-color: white;
-  color: #8a2be2;
-  border: 2px solid #8a2be2;
+  background-color: var(--bg-color-primary);
+  /* Fundo branco ou do tema */
+  color: var(--main-purple);
+  /* Usando a variável consolidada */
+  border: 2px solid var(--main-purple);
+  /* Usando a variável consolidada */
 }
 
 .demo:hover {
-  background-color: #8a2be2;
+  background-color: var(--main-purple);
+  /* Usando a variável consolidada */
   color: white;
 }
 
@@ -200,27 +629,31 @@ body {
 /* ==========================================================================
    Reduzir espaço das logos
    ========================================================================== */
-   
+
+/* Estilos para a seção de Prova Social */
 #social-proof {
-  background-color: #f8f8f8;
-  position: relative;
-  top: -125px;
-  border-top: 1px solid #cfcfcf;
-  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15);
-     height: 300px;           /* Altura fixa */
-    min-height: 140px;       /* Altura mínima */
-    max-height: 140px;       /* Altura máxima */
+  background-color: var(--bg-color-primary);
+  color: var(--text-color-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+  height: 600px;
+  min-height: 100px;
+  max-height: 195px;
 }
 
-/* Classe base para todas as logos */
+/* Estilos para os logos dentro da seção */
 .logo-parceiro {
+  filter: grayscale(100%);
+  /* Padrão para light mode */
+  transition: filter 0.3s ease;
   display: block;
   margin: 0 auto;
   max-height: 35px;
   max-width: 100%;
-  filter: grayscale(100%);
-  transition: all 0.3s ease;
-  margin-top:-75px;
+  margin-top: -140px;
+}
+
+body.dark-mode .logo-parceiro {
+  filter: grayscale(100%) brightness(150%) invert(100%);
 }
 
 /* Remove o grayscale ao passar o mouse */
@@ -249,11 +682,32 @@ body {
    Classes Utilitárias
    ========================================================================== */
 
-.bg-custom-purple { background-color: var(--purple); }
-.text-custom-purple { color: var(--purple); }
-.border-custom-purple { border-color: var(--purple); }
-.text-custom-gray-dark { color: var(--dark-gray); }
-.border-custom-gray-light { border-color: var(--light-gray); }
+.bg-custom-purple {
+  background-color: var(--main-purple);
+}
+
+/* Usando a variável consolidada */
+.text-custom-purple {
+  color: var(--main-purple);
+}
+
+/* Usando a variável consolidada */
+.border-custom-purple {
+  border-color: var(--main-purple);
+}
+
+/* Usando a variável consolidada */
+.text-custom-gray-dark {
+  color: var(--text-color-dark-gray);
+}
+
+.text-custom-white-dark {
+  color: var(--text-color-dark-gray);
+}
+
+.border-custom-gray-light {
+  border-color: var(--border-color-light);
+}
 
 /* ==========================================================================
    Estilos de Componentes
@@ -261,456 +715,492 @@ body {
 
 /* Botão com efeito de gradiente */
 .btn-gradient {
-    background-image: linear-gradient(45deg, #B329E5 0%, #8a2be2 100%);
-    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    background-size: 200% auto;
+  background-image: linear-gradient(45deg, var(--main-purple) 0%, #8a2be2 100%);
+  /* Usando a variável consolidada */
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  background-size: 200% auto;
 }
 
 .btn-gradient:hover {
-    background-position: right center;
-    box-shadow: 0 12px 25px -8px rgba(179, 41, 229, 0.4);
-    transform: translateY(-3px);
+  background-position: right center;
+  box-shadow: 0 12px 25px -8px rgba(179, 41, 229, 0.4);
+  transform: translateY(-3px);
 }
 
 /* Ícone de chat fixo */
 .chat-icon {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    width: 80px;
-    height: 80px;
-    cursor: pointer;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 80px;
+  height: 80px;
+  cursor: pointer;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .chat-icon img {
-    width: 80%;
-    height: 70%;
-    object-fit: contain;
-    pointer-events: none;
+  width: 80%;
+  height: 70%;
+  object-fit: contain;
+  pointer-events: none;
 }
 
 .chat-icon:hover {
-    box-shadow: 0 6px 12px rgba(185, 185, 185, 0.6);
-    transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(185, 185, 185, 0.6);
+  transform: scale(1.1);
 }
 
-
- 
 /* ==========================================================================
    Seção de Funcionalidades (Com Bloco Centralizado)
    ========================================================================== */
 .features-section {
-    padding: 80px 0; /* Espaçamento vertical da seção */
-    position: relative;
-    top: -100px;
+  padding: 80px 0;
+  /* Espaçamento vertical da seção */
+  position: relative;
+  top: -100px;
 }
 
 /* O container DENTRO da seção de funcionalidades agora tem o estilo visual */
 .features-section .container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 60px; /* Espaçamento interno do bloco */
-    background-color: #ffffff; /* Cor de fundo do bloco */
-    border-radius: 1px; /* Bordas arredondadas */
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 60px;
+  /* Espaçamento interno do bloco */
 }
 
 .section-header {
-    text-align: center;
-    margin-bottom: 50px;
+  text-align: center;
+  margin-bottom: 50px;
 }
 
 .section-header h2 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #212529;
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  color: var(--text-color-primary);
+  /* Usando a variável */
 }
 
 .section-header p {
-    font-size: 1.1rem;
-    color: #6c757d;
-    max-width: 600px;
-    margin: 0 auto;
+  font-size: 1.1rem;
+  color: var(--text-color-secondary);
+  /* Usando a variável */
+  max-width: 600px;
+  margin: 0 auto;
 }
 
 .features-spotlight-container {
-    display: flex;
-    gap: 3rem;
-    align-items: flex-start;
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
 }
 
 /* Menu Lateral */
 .features-menu-list {
-    flex: 0 0 280px;
+  flex: 0 0 280px;
 }
 
 .features-menu-list ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    position: sticky;
-    top: 100px;
-}
-
-.feature-menu-item {
-    display: block;
-    padding: 0.7rem 1.5rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: #495057;
-    text-decoration: none;
-    border-radius: 8px;
-    margin-bottom: 0.5rem;
-    border: 2px solid transparent;
-    transition: all 0.3s ease-in-out;
-}
-
-.feature-menu-item.active {
-    color: #0056b3;
-    background-color: #e7f1ff;
-    border-color: #a0c7ff;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: sticky;
+  top: 100px;
 }
 
 /* Conteúdo em Destaque */
 .feature-content-display {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .feature-pane {
-    display: none;
-    animation: fadeIn 0.5s ease-in-out;
+  display: none;
+  animation: fadeIn 0.5s ease-in-out;
 }
 
 .feature-pane.active {
-    display: block;
+  display: block;
 }
 
 .feature-pane img {
-    width: 100%;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-    margin-bottom: 2rem;
-    border: 1px solid #dee2e6;
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+  border: 1px solid var(--border-color-light);
+  /* Usando a variável */
 }
 
-.feature-pane h3 {
-    font-size: 2rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
-    color: #212529;
-}
-
-.feature-pane p {
-    font-size: 1.1rem;
-    line-height: 1.7;
-    color: #495057;
-}
 
 /* ==========================================================================
    Seção "Cases de Sucesso" - Carrossel
    ========================================================================== */
+
 #cases {
-    padding: 4rem 2rem;
-    max-width: 1400px;
-    margin: auto;
-    position: relative;
+  padding: 4rem 2rem;
+  max-width: 1400px;
+  margin: auto;
+  position: relative;
+  color: var(--text-color-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 #cases h2 {
-    text-align: center;
-    font-size: 2rem;
-    color: #6A8095;
-    margin-bottom: 2rem;
+  text-align: center;
+  font-size: 2rem;
+  color: var(--text-color-primary);
+  margin-bottom: 2rem;
 }
 
 .carousel-container {
-    display: flex;
-    overflow-x: hidden;
-    scroll-behavior: smooth;
-    gap: 1rem;
-    padding-bottom: 1rem;
+  display: flex;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  gap: 1rem;
+  padding-bottom: 1rem;
 }
 
 .case-card {
-    min-width: 280px;
-    background: #ffffff;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease;
-    flex-shrink: 0;
+  min-width: 280px;
+  background: var(--bg-color-primary);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+  flex-shrink: 0;
+  border: 1px solid var(--border-color-light);
 }
 
 .case-card:hover {
-    transform: translateY(-5px);
+  transform: translateY(-5px);
 }
 
 .case-card img {
-    width: auto;
-    height: 300px;
-    object-fit: cover;
+  width: auto;
+  height: 300px;
+  object-fit: cover;
+  /* Se as imagens dentro dos cards precisarem de ajuste de cor para o dark mode,
+       e elas não forem fotos, mas sim elementos gráficos (como logos de parceiros),
+       você pode adicionar um filtro aqui. Para fotos, geralmente não se aplica. */
 }
 
-.case-info { padding: 1rem; }
-.case-info h4 { margin-bottom: 0.5rem; font-size: 1.1rem; color: #6A8095; }
-.case-info p { font-size: 0.95rem; color: #999999; }
+.case-info {
+  padding: 1rem;
+}
 
+.case-info h4 {
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+  color: var(--text-color-primary);
+}
+
+.case-info p {
+  font-size: 0.95rem;
+  color: var(--text-color-secondary);
+}
+
+/* Regras para as setas do carrossel, se forem imagens (SVG) que precisam ser invertidas no dark mode */
 .nav-arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    opacity: 0.7;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    pointer-events: all;
-    z-index: 3;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 40px;
+  height: 40px;
+  opacity: 0.7;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  pointer-events: all;
+  z-index: 3;
+  filter: invert(var(--purple-filter-strength));
+  /* Usa a variável consolidada para o filtro */
 }
 
 .nav-arrow:hover {
-    opacity: 1;
-    transform: translateY(-50%) scale(1.1);
+  opacity: 1;
+  transform: translateY(-50%) scale(1.1);
 }
 
-.nav-arrow.left { left: -50px; transform: translateY(-50%) rotate(180deg); }
-.nav-arrow.right { right: -50px; }
+.nav-arrow.left {
+  left: -50px;
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.nav-arrow.right {
+  right: -50px;
+}
 
 /* ==========================================================================
    Seção "Sucesso do Cliente" - VERSÃO TECNOLÓGICA E MODERNA
    ========================================================================== */
 
-#casess {
-  background-color: #ffffff;
-max-width: 100%;
-}
-
 .onboard-section {
-    /* Fundo com gradiente escuro para um visual mais tecnológico */
-    background-image: linear-gradient(145deg, #B329E5 0%, #6A8095 100%);
-    color: #ffffff;
-    /* Mais espaçamento vertical para a seção respirar */
-    padding: 100px 20px;
-    overflow: hidden; /* Garante que os elementos de fundo não vazem */
-    /* Centraliza o conteúdo da seção para melhor distribuição */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    display: grid;
-    gap: 30px;
-    margin-bottom: 60px;
-    width: 100%;
-    margin-left: auto; /* This centers the grid within its parent */
-    margin-right: auto; /* This centers the grid within its parent */
-    position: relative;
-    top: -120px;
-    border-top: 1px solid #cfcfcf; /* você pode ajustar a espessura e a cor */
-
+  /* Fundo com gradiente escuro para um visual mais tecnológico */
+  /* Se você quiser que ele mude com o tema, use variáveis para as cores do gradiente aqui também */
+  background-image: linear-gradient(145deg, #B329E5 0%, #6A8095 100%);
+  color: #ffffff;
+  /* Manter fixo se a seção for sempre com texto claro */
+  padding: 100px 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  display: grid;
+  gap: 30px;
+  margin-bottom: 60px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: -120px;
+  border-top: 1px solid var(--border-color-light);
+  /* Usando a variável */
 }
 
 .onboard-section .container {
-    max-width: 1400px;
-    width: 100%; /* Garante que o container ocupe a largura total disponível */
-    margin: 0 auto;
-    text-align: center;
-    position: relative; /* Necessário para elementos de fundo, se houver */
-    z-index: 2;
-    padding: 0 15px; /* Adiciona um pequeno padding horizontal para evitar que o conteúdo grude nas bordas em telas menores */
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  padding: 0 15px;
 }
 
 .onboard-section h2 {
-    font-size: 2.8rem;
-    margin-bottom: 1rem; /* Ajuste fino */
-    font-weight: 700;
-    color: #ffffff;
-    line-height: 1.2; /* Melhora a legibilidade do título */
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
+  color: #ffffff;
+  /* Manter fixo ou usar variável dependendo do design */
+  line-height: 1.2;
 }
 
 .onboard-section .subtitle {
-    font-size: 1.25rem;
-    margin-bottom: 60px; /* Mais espaço antes dos cards */
-    color: #A0AEC0; /* Cor mais suave para o subtítulo */
-    max-width: 600px; /* Aumenta um pouco a largura para melhor leitura */
-    margin-left: auto;
-    margin-right: auto;
-    line-height: 1.6; /* Aumenta a altura da linha para melhor legibilidade */
+  font-size: 1.25rem;
+  margin-bottom: 60px;
+  color: var(--text-color-secondary);
+  /* Usando a variável */
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
 }
 
 .onboard-cards {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* Ajusta o minmax para melhor responsividade em telas menores */
-    gap: 30px; /* Aumenta o vão entre os cards */
-    margin-bottom: 40px;
-    width: 100%; /* Garante que os cards ocupem a largura total do container */
-    max-width: 1200px; /* Adiciona um max-width para os cards, centralizando-os em telas muito grandes */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+  width: 100%;
+  max-width: 1200px;
 }
 
 .card {
-    /* Efeito de vidro (Glassmorphism) */
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px); /* Para compatibilidade com Safari */
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    border-radius: 16px;
-    padding: 30px 25px;
-    text-align: center; /* **Mudado para center para centralizar ícone e texto do card** */
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-    cursor: default;
-    display: flex; /* Adiciona flexbox para alinhar o conteúdo interno */
-    flex-direction: column;
-    align-items: center; /* **Centraliza o conteúdo horizontalmente dentro do card** */
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.02));
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  padding: 30px 25px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  cursor: default;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .card:hover {
-    transform: translateY(-10px) scale(1.02);
-    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
-    border-color: rgba(255, 255, 255, 0.3);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .icon {
-    font-size: 2.2rem; /* Ícone um pouco menor */
-    margin-bottom: 20px;
-    /* Destaque para o ícone */
-    width: 60px;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    /* Remover margin-left: auto e margin-right: auto se existirem, pois text-align: center no card já faz o trabalho */
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
 }
 
 .card h3 {
-    font-size: 1.4rem; /* Título do card mais proeminente */
-    margin-bottom: 12px;
-    font-weight: 600;
-    color: #ffffff;
-    text-align: center; /* **Centraliza o título do card** */
+  font-size: 1.4rem;
+  margin-bottom: 12px;
+  font-weight: 600;
+  color: #ffffff;
+  /* Manter fixo ou usar variável dependendo do design */
+  text-align: center;
 }
 
 .card p {
-    font-size: 1rem;
-    line-height: 1.6; /* Altura de linha maior para legibilidade */
-    color: #ffffff; /* Mesma cor suave do subtítulo */
-    text-align: center; /* **Centraliza o parágrafo do card** */
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #ffffff;
+  /* Manter fixo ou usar variável dependendo do design */
+  text-align: center;
 }
 
-/* --- */
 /* Estilos para o Botão de Ação */
 .btn-start {
-    background-color: #ffffff;
-    color: #B329E5;
-    border: none;
-    padding: 14px 35px;
-    font-size: 1.2rem;
-    font-weight: 700;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: #ffffff;
+  color: var(--main-purple);
+  /* Usando a variável consolidada */
+  border: none;
+  padding: 14px 35px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .btn-start:hover {
-    background-color: #B329E5; /* Escurece a cor no hover */
-    color: #ffffff;
-    transform: translateY(-3px); /* Leve efeito de elevação */
-    box-shadow: 0 6px 20px rgba(216, 216, 216, 0.6); /* Sombra mais intensa no hover */
+  background-color: var(--main-purple);
+  /* Usando a variável consolidada */
+  color: #ffffff;
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(216, 216, 216, 0.6);
 }
 
 /* Media Queries para Responsividade */
 @media (max-width: 768px) {
-    .onboard-section {
-        padding: 80px 15px; /* Reduz o padding em telas menores */
-    }
+  .onboard-section {
+    padding: 80px 15px;
+  }
 
-    .onboard-section h2 {
-        font-size: 2.2rem; /* Reduz o tamanho do título */
-    }
+  .onboard-section h2 {
+    font-size: 2.2rem;
+  }
 
-    .onboard-section .subtitle {
-        font-size: 1.1rem; /* Reduz o tamanho do subtítulo */
-        margin-bottom: 40px;
-    }
+  .onboard-section .subtitle {
+    font-size: 1.1rem;
+    margin-bottom: 40px;
+  }
 
-    .onboard-cards {
-        grid-template-columns: 1fr; /* Coluna única em telas muito pequenas */
-        gap: 20px;
-    }
+  .onboard-cards {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 
-    .card {
-        padding: 25px 20px; /* Ajusta o padding do card */
-    }
+  .card {
+    padding: 25px 20px;
+  }
 
-    .icon {
-        /* Não precisa de ajustes aqui, pois o card já centraliza */
-    }
-
-    .btn-start {
-        padding: 12px 25px; /* Ajusta o padding do botão em telas menores */
-        font-size: 1rem;
-    }
+  .btn-start {
+    padding: 12px 25px;
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 480px) {
-    .onboard-section h2 {
-        font-size: 1.8rem;
-    }
+  .onboard-section h2 {
+    font-size: 1.8rem;
+  }
 
-    .onboard-section .subtitle {
-        font-size: 1rem;
-    }
+  .onboard-section .subtitle {
+    font-size: 1rem;
+  }
 }
 
 
+#container,
 #precos {
-    background-color:#f9fafb;
-;
+  max-width: 1300px;
+  margin: auto;
+  position: relative;
 }
 
-
-#depoimentos {
-  box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.15); /* sombra para cima, ajustável */
+#press .slick-slide {
+  display: inline-block !important;
 }
+
+#press .slick-track {
+  display: flex !important;
+  align-items: center;
+}
+
+#press .slick-list {
+  overflow: hidden;
+}
+
 
 /* ==========================================================================
    Animações e Efeitos
    ========================================================================== */
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Animação para slider de depoimentos */
-.testimonial-slider-track { transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1); }
-.testimonial-dot { transition: all 0.3s ease; }
-.testimonial-dot.active { background-color: var(--purple); transform: scale(1.25); }
-.testimonial-arrow { transition: all 0.3s ease; border-radius: 9999px; }
-.testimonial-arrow:hover { background-color: var(--purple); transform: scale(1.1); }
-.testimonial-arrow:hover svg { color: white; }
+.testimonial-slider-track {
+  transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.testimonial-dot {
+  transition: all 0.3s ease;
+}
+
+.testimonial-dot.active {
+  background-color: var(--main-purple);
+  transform: scale(1.25);
+}
+
+/* Usando a variável consolidada */
+.testimonial-arrow {
+  transition: all 0.3s ease;
+  border-radius: 9999px;
+}
+
+.testimonial-arrow:hover {
+  background-color: var(--main-purple);
+  transform: scale(1.1);
+}
+
+/* Usando a variável consolidada */
+.testimonial-arrow:hover svg {
+  color: white;
+}
 
 /* ==========================================================================
    Responsividade
    ========================================================================== */
 
 @media (max-width: 992px) {
-    /* Ajusta a seção de funcionalidades para telas menores */
-    .features-spotlight-container { flex-direction: column; }
-    .features-menu-list ul { position: static; display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    
-    /* Ajusta o padding do container centralizado em telas menores */
-    .features-section .container {
-        padding: 40px 20px;
-    }
+
+  /* Ajusta a seção de funcionalidades para telas menores */
+  .features-spotlight-container {
+    flex-direction: column;
+  }
+
+  .features-menu-list ul {
+    position: static;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  /* Ajusta o padding do container centralizado em telas menores */
+  .features-section .container {
+    padding: 40px 20px;
+  }
 }
-
-
-
-        

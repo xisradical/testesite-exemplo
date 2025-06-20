@@ -19,17 +19,64 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
+          // Theme Toggle Logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+    const sunIcon = document.getElementById('sun-icon');
+    const moonIcon = document.getElementById('moon-icon');
 
+    // Check for saved theme preference on load
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+        body.classList.add('dark-mode');
+        sunIcon.classList.add('hidden');
+        moonIcon.classList.remove('hidden');
+    } else {
+        // Default to light mode if no preference or preference is 'light'
+        body.classList.remove('dark-mode');
+        sunIcon.classList.remove('hidden');
+        moonIcon.classList.add('hidden');
+    }
+
+    // Add click event listener to the toggle button
+    themeToggle.addEventListener('click', () => {
+        body.classList.toggle('dark-mode');
+        if (body.classList.contains('dark-mode')) {
+            localStorage.setItem('theme', 'dark');
+            sunIcon.classList.add('hidden');
+            moonIcon.classList.remove('hidden');
+        } else {
+            localStorage.setItem('theme', 'light');
+            sunIcon.classList.remove('hidden');
+            moonIcon.classList.add('hidden');
+        }
+    });
+
+    
     /**
-     * Inicializa a biblioteca AOS (Animate On Scroll) para animações de entrada.
-     */
+   * Inicializa e atualiza a biblioteca AOS (Animate On Scroll) para animações de entrada.
+   */
     function initAOS() {
         if (typeof AOS !== 'undefined') {
             AOS.init({
-                duration: 750,
-                once: true,
-                offset: 50
+                duration: 750, // duração da animação
+                once: false,   // permite reanimar ao rolar novamente
+                offset: 50     // distância para iniciar animação
             });
+
+            // Atualiza o AOS dinamicamente caso novos elementos apareçam na página
+            const observer = new MutationObserver(() => {
+                AOS.refreshHard(); // força o AOS a reescanear os elementos na tela
+            });
+
+            observer.observe(document.body, {
+                childList: true,
+                subtree: true
+            });
+
+            // Revalida o AOS em mudanças de visibilidade como tabs ou sliders
+            window.addEventListener('resize', () => AOS.refresh());
+            window.addEventListener('scroll', () => AOS.refresh());
         }
     }
 
@@ -165,16 +212,16 @@ document.addEventListener('DOMContentLoaded', () => {
     main();
 });
 
-  $(document).ready(function () {
-      $('.image-wrapper').on('mouseenter', function () {
+$(document).ready(function () {
+    $('.image-wrapper').on('mouseenter', function () {
         $(this).find('.overlay').css('background', 'rgba(0, 123, 255, 0.2)');
-      }).on('mouseleave', function () {
+    }).on('mouseleave', function () {
         $(this).find('.overlay').css('background', 'rgba(0, 0, 0, 0.15)');
-      });
     });
+});
 
 
- const openBtn = document.getElementById("openVideo");
+const openBtn = document.getElementById("openVideo");
 const closeBtn = document.getElementById("closeVideo");
 const lightbox = document.getElementById("videoLightbox");
 const iframe = document.getElementById("videoIframe");
@@ -182,38 +229,24 @@ const iframe = document.getElementById("videoIframe");
 const videoUrlBase = "https://www.youtube.com/embed/_-OkIOClkiE?si=HRQl8KU139pygAMQ";
 
 openBtn.addEventListener("click", () => {
-  lightbox.style.display = "flex";
-  iframe.src = videoUrlBase + "&autoplay=1";
-  document.body.style.overflow = "hidden"; // trava o fundo
+    lightbox.style.display = "flex";
+    iframe.src = videoUrlBase + "&autoplay=1";
+    document.body.style.overflow = "hidden"; // trava o fundo
 });
 
 closeBtn.addEventListener("click", () => {
-  lightbox.style.display = "none";
-  iframe.src = "";
-  document.body.style.overflow = "auto"; // libera o fundo
+    lightbox.style.display = "none";
+    iframe.src = "";
+    document.body.style.overflow = "auto"; // libera o fundo
 });
 
 
-
- if (localStorage.getItem('theme') === 'dark' || 
-        (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-        document.documentElement.classList.add('dark');
-    }
-
-    // Função para alternar entre light e dark mode
-    function toggleTheme() {
-        const html = document.documentElement;
-        if (html.classList.contains('dark')) {
-            html.classList.remove('dark');
-            localStorage.setItem('theme', 'light');
-        } else {
-            html.classList.add('dark');
-            localStorage.setItem('theme', 'dark');
-        }
-    }
-
-        $(document).ready(function(){
-        $('.press-carousel').slick({
+// Sáimos na Mídia
+$(document).ready(function () {
+    const $carousel = $('#press .press-carousel');
+    if ($carousel.length) {
+        console.log('Iniciando slick no press-carousel...');
+        $carousel.slick({
             dots: true,
             infinite: true,
             speed: 300,
@@ -224,42 +257,11 @@ closeBtn.addEventListener("click", () => {
             autoplaySpeed: 2000,
             arrows: false
         });
-    });
+    } else {
+        console.warn('Nenhum .press-carousel encontrado dentro de #press');
+    }
+});
 
-
-
-    function protegerSectionPrecos() {
-    const section = document.getElementById('precos');
-
-    // Remove classes herdadas se existirem
-    section.classList.remove('dark:bg-gray-900', 'dark', 'bg-gray-800');
-    
-    // Garante o fundo branco e textos escuros
-    section.style.backgroundColor = '#ffffff'; // ou use uma classe
-    section.querySelectorAll('*').forEach(el => {
-      el.style.color = '';
-      if (el.classList.contains('dark:text-white') || el.classList.contains('dark:text-gray-200')) {
-        el.classList.remove('dark:text-white', 'dark:text-gray-200');
-        el.classList.add('text-gray-800');
-      }
-    });
-  }
-
-  // Executa no carregamento
-  document.addEventListener('DOMContentLoaded', () => {
-    protegerSectionPrecos();
-  });
-
-  // Reexecuta sempre que o tema for trocado
-  function toggleTheme() {
-    const html = document.documentElement;
-    const isDark = html.classList.contains('dark');
-    html.classList.toggle('dark');
-    localStorage.setItem('theme', isDark ? 'light' : 'dark');
-
-    // Protege a seção após a mudança de tema
-    protegerSectionPrecos();
-
-    // Se usar AOS
-    if (typeof AOS !== 'undefined') AOS.refresh();
-  }
+$carousel.on('setPosition', function () {
+    AOS.refresh(); // Atualiza os elementos com data-aos
+});
