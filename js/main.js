@@ -266,32 +266,59 @@ $carousel.on('setPosition', function () {
     AOS.refresh(); // Atualiza os elementos com data-aos
 });
 
- const input = document.getElementById('input');
-  const messages = document.getElementById('messages');
+ 
 
-  function appendMessage(text, type) {
-    const div = document.createElement('div');
-    div.className = `msg ${type}`;
-    div.textContent = text;
-    messages.appendChild(div);
-    messages.scrollTop = messages.scrollHeight;
-  }
 
-  input.addEventListener('keydown', async (e) => {
-    if (e.key === 'Enter') {
-      const message = input.value.trim();
-      if (!message) return;
+const chatBox = document.getElementById('chat-box');
+const userInput = document.getElementById('user-input');
+const sendBtn = document.getElementById('send-btn');
 
-      appendMessage(message, 'user');
-      input.value = '';
+const WEBHOOK_URL = 'https://n8n.vtracker.com.br/webhook/chat'; // Troque aqui pelo seu webhook real
 
-      const response = await fetch('https://n8n.vtracker.com.br/webhook/chat', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message })
-      });
+function addMessage(text, fromUser = true) {
+  const div = document.createElement('div');
+  div.classList.add('msg');
+  div.classList.add(fromUser ? 'user-msg' : 'bot-msg');
+  div.textContent = text;
+  chatBox.appendChild(div);
+  chatBox.scrollTop = chatBox.scrollHeight; // rolar para o fim
+}
 
-      const data = await response.json();
-      appendMessage(data.reply, 'bot');
+async function enviarMensagem(mensagem) {
+  if (!mensagem.trim()) return;
+
+  addMessage(mensagem, true);
+  userInput.value = '';
+  sendBtn.disabled = true;
+
+  try {
+    const response = await fetch(WEBHOOK_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: mensagem }),
+    });
+
+    if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+
+    const data = await response.json();
+
+    if (data.Return) {
+      addMessage(data.Return, false);
+    } else {
+      addMessage('Resposta inválida do servidor.', false);
     }
-  });
+  } catch (err) {
+    addMessage('Erro ao conectar com o chatbot: ' + err.message, false);
+  } finally {
+    sendBtn.disabled = false;
+    userInput.focus();
+  }
+}
+
+// Aqui estão os eventos para enviar a mensagem quando clicar no botão ou apertar Enter
+sendBtn.addEventListener('click', () => enviarMensagem(userInput.value));
+userInput.addEventListener('keydown', e => {
+  if (e.key === 'Enter') {
+    enviarMensagem(userInput.value);
+  }
+});
