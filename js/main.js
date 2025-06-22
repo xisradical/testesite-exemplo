@@ -265,3 +265,33 @@ $(document).ready(function () {
 $carousel.on('setPosition', function () {
     AOS.refresh(); // Atualiza os elementos com data-aos
 });
+
+ const input = document.getElementById('input');
+  const messages = document.getElementById('messages');
+
+  function appendMessage(text, type) {
+    const div = document.createElement('div');
+    div.className = `msg ${type}`;
+    div.textContent = text;
+    messages.appendChild(div);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  input.addEventListener('keydown', async (e) => {
+    if (e.key === 'Enter') {
+      const message = input.value.trim();
+      if (!message) return;
+
+      appendMessage(message, 'user');
+      input.value = '';
+
+      const response = await fetch('https://n8n.vtracker.com.br/webhook/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      });
+
+      const data = await response.json();
+      appendMessage(data.reply, 'bot');
+    }
+  });
