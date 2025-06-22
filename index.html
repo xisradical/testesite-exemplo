@@ -226,7 +226,7 @@
                     </nav>
                     <div class="feature-content-display">
                         <div class="feature-pane active" id="monitoramento">
-                            <img src="https://placehold.co/800x450/00AAFF/FFFFFF?text=Monitoramentos"
+                            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhoRyUU5Vc-v7pVtx9_zEr3R9VX-72X0_mTBZ8e_VR2YOccuUecG7BHWf8GUj6-mdYg1I9BbSfapRSSOvyQfAIc98HFOeBCOOb04TMbG4QkdxyX0juH5G1FWgIJwl5gnpZ8nw9d1Mn8wAGRTD1i0tPz7Zh0TvjzucuWt1WyrXyNbPGf8X2y9dXAGlMcMrI"
                                 alt="Visualização da função de Monitoramento">
                             <h3>Monitoramento</h3>
                             <p>O monitoramento tem o objetivo de garantir a interpretação de dados aproveitando o tempo
@@ -235,7 +235,7 @@
                                 narrativas de forma simples e eficaz.</p>
                         </div>
                         <div class="feature-pane" id="dashboards">
-                            <img src="https://placehold.co/800x450/00AAFF/FFFFFF?text=Dashboards"
+                            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgp-2akqmmNB8icbPEShqUIYYDGZFr1PBbunaBtgZa5sslYEn4ZVA3Ml2__ug7RScdHGtKXVvpXQbgJzMDFaapGAGqaU-LjgJUdq-7zMNkjGEJFENVwPLK4iY7An_s9Jo6RXJQ-bzibvxfKuGDFDOkOcd8wDgMq7olqgG7h00TZ_CsYgqMnPw19xvWfzng"
                                 alt="Visualização da função de Dashboards">
                             <h3>Dashboards</h3>
                             <p>O Dashboard tem o objetivo de trazer informações mais importantes sobre um monitoramento
@@ -580,6 +580,32 @@
             </section>
 
     </main>
+
+<div id="chat">
+  <div id="messages"></div>
+  <input id="input" type="text" placeholder="Digite sua pergunta..." />
+  <button onclick="sendMessage()">Enviar</button>
+</div>
+
+<script>
+  async function sendMessage() {
+    const input = document.getElementById('input');
+    const messages = document.getElementById('messages');
+    const userMessage = input.value;
+    input.value = '';
+
+    messages.innerHTML += `<p><b>Você:</b> ${userMessage}</p>`;
+
+    const response = await fetch('https://n8n.vtracker.com/webhook-test/chat-gemini', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: userMessage })
+    });
+
+    const data = await response.json();
+    messages.innerHTML += `<p><b>Gemini:</b> ${data.reply}</p>`;
+  }
+</script>
 
     <!-- Rodapé -->
     <footer class="bg-gray-800 text-gray-300">

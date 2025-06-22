@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 
-          // Theme Toggle Logic
+    // Theme Toggle Logic
     const themeToggle = document.getElementById('theme-toggle');
     const body = document.body;
     const sunIcon = document.getElementById('sun-icon');
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    
+
     /**
    * Inicializa e atualiza a biblioteca AOS (Animate On Scroll) para animações de entrada.
    */
