@@ -266,9 +266,8 @@ $carousel.on('setPosition', function () {
     AOS.refresh(); // Atualiza os elementos com data-aos
 });
 
- 
 
-
+// inicio teste
 const chatBox = document.getElementById('chat-box');
 const userInput = document.getElementById('user-input');
 const sendBtn = document.getElementById('send-btn');
@@ -276,49 +275,42 @@ const sendBtn = document.getElementById('send-btn');
 const WEBHOOK_URL = 'https://n8n.vtracker.com.br/webhook/chat'; // Troque aqui pelo seu webhook real
 
 function addMessage(text, fromUser = true) {
-  const div = document.createElement('div');
-  div.classList.add('msg');
-  div.classList.add(fromUser ? 'user-msg' : 'bot-msg');
-  div.textContent = text;
-  chatBox.appendChild(div);
-  chatBox.scrollTop = chatBox.scrollHeight; // rolar para o fim
+    const div = document.createElement('div');
+    div.classList.add('msg');
+    div.classList.add(fromUser ? 'user-msg' : 'bot-msg');
+    div.textContent = text;
+    chatBox.appendChild(div);
+    chatBox.scrollTop = chatBox.scrollHeight; // rolar para o fim
 }
 
 async function enviarMensagem(mensagem) {
-  if (!mensagem.trim()) return;
+    if (!mensagem.trim()) return;
 
-  addMessage(mensagem, true);
-  userInput.value = '';
-  sendBtn.disabled = true;
+    addMessage(mensagem, true);
+    userInput.value = '';
+    sendBtn.disabled = true;
 
-  try {
-    const response = await fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ message: mensagem }),
-    });
+    try {
+        const response = await fetch(WEBHOOK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: mensagem }),
+        });
 
-    if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
+        if (!response.ok) throw new Error(`Erro HTTP ${response.status}`);
 
-    const data = await response.json();
+        const data = await response.json();
 
-    if (data.Return) {
-      addMessage(data.Return, false);
-    } else {
-      addMessage('Resposta inválida do servidor.', false);
+        if (data.Return) {
+            addMessage(data.Return, false);
+        } else {
+            addMessage('Resposta inválida do servidor.', false);
+        }
+    } catch (err) {
+        addMessage('Erro ao conectar com o chatbot: ' + err.message, false);
+    } finally {
+        sendBtn.disabled = false;
+        userInput.focus();
     }
-  } catch (err) {
-    addMessage('Erro ao conectar com o chatbot: ' + err.message, false);
-  } finally {
-    sendBtn.disabled = false;
-    userInput.focus();
-  }
 }
 
-// Aqui estão os eventos para enviar a mensagem quando clicar no botão ou apertar Enter
-sendBtn.addEventListener('click', () => enviarMensagem(userInput.value));
-userInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    enviarMensagem(userInput.value);
-  }
-});
